@@ -1,0 +1,224 @@
+<%- include('../partials/head') %>
+<%- include('../partials/nav') %>
+
+<div class="container mt-5">
+
+    <div class="row justify-content-center">
+
+        <div class="col-lg-8">
+
+            <div class="card shadow border-0">
+
+                <div class="card-body p-5">
+
+                    <h1 class="mb-4 text-center">
+
+                        Create Supermarket
+
+                    </h1>
+
+                    <form
+                        action="/supermarkets/create"
+                        method="POST"
+                    >
+
+                        <!-- NAME -->
+                        <div class="mb-3">
+
+                            <label class="form-label">
+
+                                Supermarket Name
+
+                            </label>
+
+                            <input
+                                type="text"
+                                name="name"
+                                class="form-control"
+                                required
+                            >
+
+                        </div>
+
+                        <!-- DESCRIPTION -->
+                        <div class="mb-3">
+
+                            <label class="form-label">
+
+                                Description
+
+                            </label>
+
+                            <textarea
+                                name="description"
+                                class="form-control"
+                                rows="3"
+                                required
+                            ></textarea>
+
+                        </div>
+
+                        <!-- LOCATION -->
+                        <h4 class="mt-4 mb-3">
+
+                            Location
+
+                        </h4>
+
+                        <!-- STREET -->
+                        <div class="mb-3">
+
+                            <label class="form-label">
+
+                                Street
+
+                            </label>
+
+                            <input
+                                type="text"
+                                name="street"
+                                class="form-control"
+                                required
+                            >
+
+                        </div>
+
+                        <div class="row">
+
+                            <!-- CITY -->
+                            <div class="col-md-6 mb-3">
+
+                                <label class="form-label">
+
+                                    City
+
+                                </label>
+
+                                <input
+                                    type="text"
+                                    name="city"
+                                    class="form-control"
+                                    required
+                                >
+
+                            </div>
+
+                            <!-- POSTAL CODE -->
+                            <div class="col-md-6 mb-3">
+
+                                <label class="form-label">
+
+                                    Postal Code
+
+                                </label>
+
+                                <input
+                                    type="text"
+                                    name="postalCode"
+                                    class="form-control"
+                                    required
+                                >
+
+                            </div>
+
+                        </div>
+
+                        <!-- SCHEDULE -->
+                        <div class="mb-3">
+
+                            <label class="form-label">
+
+                                Schedule
+
+                            </label>
+
+                            <input
+                                type="text"
+                                name="schedule"
+                                class="form-control"
+                                placeholder="08:00 - 22:00"
+                                required
+                            >
+
+                        </div>
+
+                        <!-- DELIVERY -->
+                        <h4 class="mt-4 mb-3">
+
+                            Delivery Options
+
+                        </h4>
+
+                        <!-- METHOD -->
+                        <div class="mb-3">
+
+                            <label class="form-label">
+
+                                Delivery Method
+
+                            </label>
+
+                            <select
+                                name="method"
+                                class="form-select"
+                                required
+                            >
+
+                                <option value="pickup">
+
+                                    Store Pickup
+
+                                </option>
+
+                                <option value="courier">
+
+                                    Courier Delivery
+
+                            </select>
+
+                        </div>
+
+                        <!-- COST -->
+                        <div class="mb-4">
+
+                            <label class="form-label">
+
+                                Delivery Cost (€)
+
+                            </label>
+
+                            <input
+                                type="number"
+                                name="cost"
+                                class="form-control"
+                                min="0"
+                                step="0.01"
+                                value="0"
+                                required
+                            >
+
+                        </div>
+
+                        <!-- SUBMIT -->
+                        <button
+                            type="submit"
+                            class="btn btn-success w-100 btn-lg"
+                        >
+
+                            Create Supermarket
+
+                        </button>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<%- include('../partials/foot') %>

@@ -1,0 +1,104 @@
+<%- include('../partials/head') %>
+<%- include('../partials/nav') %>
+
+<div class="container mt-5">
+
+    <h1 class="mb-4">
+        Sales
+    </h1>
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+
+    <div>
+
+        <h3>
+            Generate and manage sales orders
+        </h3>
+
+        <p class="text-muted">
+            Manage all sales orders
+        </p>
+
+    </div>
+
+    <a
+        href="/sales/create"
+        class="btn btn-success btn-lg"
+    >
+
+        + Create Sale
+
+    </a>
+
+</div>
+
+    <div class="row">
+
+        <% if(sales.length === 0) { %>
+
+            <div class="alert alert-warning">
+
+                No sales found.
+
+            </div>
+
+        <% } %>
+
+        <% sales.forEach(sale => { %>
+
+            <div class="col-lg-6 mb-4">
+
+                <div class="card shadow border-0">
+
+                    <div class="card-body">
+
+                        <h4>
+
+                            Customer:
+                            <%= sale.customerEmail %>
+
+                        </h4>
+
+                        <p>
+
+                            <strong>Total:</strong>
+
+                            €<%= sale.total %>
+
+                        </p>
+
+                        <p>
+
+                            <strong>Products:</strong>
+
+                        </p>
+
+                        <ul>
+
+                            <% sale.products.forEach(item => { %>
+
+                                <li>
+
+                                    <%= item.product?.name || 'Deleted Product' %>
+
+                                    x <%= item.quantity %>
+
+                                </li>
+
+                            <% }) %>
+
+                        </ul>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        <% }) %>
+
+    </div>
+
+</div>
+
+<%- include('../partials/foot') %>

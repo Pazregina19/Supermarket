@@ -1,0 +1,114 @@
+<%- include('../partials/head') %>
+<%- include('../partials/nav') %>
+
+<div class="container mt-5">
+
+    <h1 class="mb-4">
+        Shopping Cart
+    </h1>
+
+    <% if(products.length === 0) { %>
+
+        <div class="alert alert-warning">
+
+            Cart is empty.
+
+        </div>
+
+    <% } else { %>
+
+        <div class="row">
+
+            <% products.forEach(item => { %>
+
+                <div class="col-lg-4 mb-4">
+
+                    <div class="card shadow border-0">
+
+                        <img
+                            src="/uploads/<%= item.product.image %>"
+                            class="card-img-top"
+                            style="
+                                height: 220px;
+                                object-fit: cover;
+                            "
+                        >
+
+                        <div class="card-body">
+
+                            <h4>
+
+                                <%= item.product.name %>
+
+                            </h4>
+
+                            <p>
+
+                                Quantity:
+                                <%= item.quantity %>
+
+                            </p>
+
+                            <p>
+
+                                Price:
+                                €<%= item.product.price %>
+
+                            </p>
+
+                            <form
+                                action="/cart/remove/<%= item.product._id %>"
+                                method="POST"
+                            >
+
+                                <button
+                                    class="btn btn-danger w-100"
+                                >
+
+                                    Remove
+
+                                </button>
+
+                            </form>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            <% }) %>
+
+        </div>
+
+        <div class="card shadow p-4">
+
+            <h2>
+
+                Total:
+                €<%= total %>
+
+            </h2>
+
+            <form
+                action="/cart/checkout"
+                method="POST"
+            >
+
+                <button
+                    class="btn btn-success btn-lg mt-3"
+                >
+
+                    Checkout
+
+                </button>
+
+            </form>
+
+        </div>
+
+    <% } %>
+
+</div>
+
+<%- include('../partials/foot') %>

@@ -1,0 +1,81 @@
+<%- include('../partials/head') %>
+<%- include('../partials/nav') %>
+
+<div class="container mt-4">
+
+  <h1>Supermarkets</h1>
+
+  <a href="/supermarkets/create"
+     class="btn btn-primary mb-3">
+     Add Supermarket
+  </a>
+
+  <table class="table table-bordered">
+
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Location</th>
+        <th>Description</th>
+        <th>Status</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+
+    <tbody>
+
+      <% supermarkets.forEach(supermarket => { %>
+
+        <tr>
+
+          <td>
+            <%= supermarket.name %>
+          </td>
+
+          <td>
+            <%= supermarket.location.street %>,
+            <%= supermarket.location.city %>,
+            <%= supermarket.location.postalCode %>
+          </td>
+
+          <td>
+            <%= supermarket.description %>
+          </td>
+
+          <td>
+
+            <% if (supermarket.approved) { %>
+
+              <span class="text-success">
+                Approved
+              </span>
+
+            <% } else { %>
+
+              <span class="text-danger">
+                Pending
+              </span>
+
+            <% } %>
+
+          </td>
+
+          <td>
+
+            <a href="/supermarkets/<%= supermarket._id %>">
+              View
+            </a>
+
+          </td>
+
+        </tr>
+
+      <% }) %>
+
+    </tbody>
+
+  </table>
+
+</div>
+
+<%- include('../partials/foot') %>

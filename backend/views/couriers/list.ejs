@@ -1,0 +1,58 @@
+<%- include('../partials/head') %>
+<%- include('../partials/nav') %>
+
+<div class="container mt-4">
+
+    <h1>Couriers</h1>
+
+    <table class="table table-bordered table-striped">
+
+        <thead>
+
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Total Deliveries</th>
+                <th>Delivered</th>
+                <th>Active Deliveries</th>
+            </tr>
+
+        </thead>
+
+        <tbody>
+
+            <% couriers.forEach(courier => { %>
+
+                <tr>
+
+                    <td>
+                        <%= courier.username %>
+                    </td>
+
+                    <td>
+                        <%= courier.email %>
+                    </td>
+
+                    <td>
+                        <%= courier.total %>
+                    </td>
+
+                    <td>
+                        <%= courier.delivered %>
+                    </td>
+
+                    <td>
+                        <%= courier.active %>
+                    </td>
+
+                </tr>
+
+            <% }) %>
+
+        </tbody>
+
+    </table>
+
+</div>
+
+<%- include('../partials/foot') %>
