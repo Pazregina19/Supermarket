@@ -12,16 +12,16 @@ import {
 import { AuthService } from '../../services/auth';
 
 @Component({
-  selector: 'app-register-client',
+  selector: 'app-register-admin',
   standalone: true,
   imports: [
     FormsModule,
     MatSnackBarModule
   ],
-  templateUrl: './register-client.html',
-  styleUrls: ['./register-client.css']
+  templateUrl: './register-admin.html',
+  styleUrls: ['./register-admin.css']
 })
-export class RegisterClient {
+export class RegisterAdmin {
 
   username: string = '';
 
@@ -45,18 +45,18 @@ export class RegisterClient {
 
       password: this.password,
 
-      role: 'client'
+      role: 'admin'
 
     };
 
     this.authService
-      .register(userData)
+      .registerAdmin(userData)
       .subscribe({
 
         next: () => {
 
           this.snackBar.open(
-            'Client registered successfully',
+            'Admin registered successfully',
             'Close',
             {
               duration: 3000

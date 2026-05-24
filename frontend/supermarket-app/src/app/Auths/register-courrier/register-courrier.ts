@@ -1,9 +1,82 @@
 import { Component } from '@angular/core';
 
+import { Router } from '@angular/router';
+
+import { FormsModule } from '@angular/forms';
+
+import {
+  MatSnackBar,
+  MatSnackBarModule
+} from '@angular/material/snack-bar';
+
+import { AuthService } from '../../services/auth';
+
 @Component({
-  selector: 'app-register-courrier',
-  imports: [],
+  selector: 'app-register-courier',
+  standalone: true,
+  imports: [
+    FormsModule,
+    MatSnackBarModule
+  ],
   templateUrl: './register-courrier.html',
-  styleUrl: './register-courrier.css',
+  styleUrls: ['./register-courrier.css']
 })
-export class RegisterCourrier {}
+export class RegisterCourier {
+
+  username: string = '';
+  email: string = '';
+  password: string = '';
+
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private snackBar: MatSnackBar
+  ) {}
+
+  register(): void {
+
+    const userData = {
+
+      username: this.username,
+      email: this.email,
+      password: this.password,
+
+    };
+
+    this.authService
+      .registerCourier(userData)
+      .subscribe({
+
+        next: () => {
+
+          this.snackBar.open(
+            'Courier registered successfully',
+            'Close',
+            {
+              duration: 3000
+            }
+          );
+
+          this.router.navigate(['/login']);
+
+        },
+
+        error: (error: any) => {
+
+          console.error(error);
+
+          this.snackBar.open(
+            'Registration failed',
+            'Close',
+            {
+              duration: 3000
+            }
+          );
+
+        }
+
+      });
+
+  }
+
+}

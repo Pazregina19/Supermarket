@@ -1,1 +1,68 @@
-<p>register-client works!</p>
+<div class="card">
+
+  <div class="card-header">
+
+    <h2 class="card-title">
+      Client Registration
+    </h2>
+
+  </div>
+
+  <div class="card-content">
+
+    <form class="form">
+
+      <div class="form-field">
+
+        <input
+          class="input"
+          placeholder="Username"
+          [(ngModel)]="username"
+          name="username"
+          required
+        />
+
+      </div>
+
+      <div class="form-field">
+
+        <input
+          class="input"
+          type="email"
+          placeholder="Email"
+          [(ngModel)]="email"
+          name="email"
+          required
+        />
+
+      </div>
+
+      <div class="form-field">
+
+        <input
+          class="input"
+          type="password"
+          placeholder="Password"
+          [(ngModel)]="password"
+          name="password"
+          required
+        />
+
+      </div>
+
+    </form>
+
+  </div>
+
+  <div class="card-actions">
+
+    <button
+      class="button primary"
+      (click)="register()"
+    >
+      Register Client
+    </button>
+
+  </div>
+
+</div>

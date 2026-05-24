@@ -50,6 +50,41 @@ export class AuthService {
     );
 
   }
+  registerCourier(userData: any): Observable<any> {
+
+  userData.role = 'courier';
+
+  return this.http.post<any>(
+    `${this.apiUrl}/register`,
+    userData,
+    httpOptions
+  );
+
+}
+
+registerSupermarket(userData: any): Observable<any> {
+
+  userData.role = 'supermarket';
+
+  return this.http.post<any>(
+    `${this.apiUrl}/register`,
+    userData,
+    httpOptions
+  );
+
+}
+
+registerAdmin(userData: any): Observable<any> {
+
+  userData.role = 'admin';
+
+  return this.http.post<any>(
+    `${this.apiUrl}/register`,
+    userData,
+    httpOptions
+  );
+
+}
 
   logout(): void {
 

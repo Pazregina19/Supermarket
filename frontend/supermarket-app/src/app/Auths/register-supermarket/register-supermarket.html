@@ -1,1 +1,159 @@
-<p>register-supermarket works!</p>
+<div class="card">
+
+  <div class="card-header">
+
+    <h2 class="card-title">
+      Supermarket Registration
+    </h2>
+
+  </div>
+
+  <div class="card-content">
+
+    <form class="form">
+
+      <div class="form-field">
+
+        <input
+          class="input"
+          placeholder="Supermarket Name"
+          [(ngModel)]="name"
+          name="name"
+          required
+        />
+
+      </div>
+
+      <div class="form-field">
+
+        <textarea
+          class="input"
+          placeholder="Description"
+          [(ngModel)]="description"
+          name="description"
+        ></textarea>
+
+      </div>
+
+      <div class="form-field">
+
+        <input
+          class="input"
+          placeholder="Street"
+          [(ngModel)]="street"
+          name="street"
+          required
+        />
+
+      </div>
+
+      <div class="form-field">
+
+        <input
+          class="input"
+          placeholder="City"
+          [(ngModel)]="city"
+          name="city"
+          required
+        />
+
+      </div>
+
+      <div class="form-field">
+
+        <input
+          class="input"
+          placeholder="Postal Code"
+          [(ngModel)]="postalCode"
+          name="postalCode"
+          required
+        />
+
+      </div>
+
+      <div class="form-field">
+
+        <input
+          class="input"
+          placeholder="Schedule"
+          [(ngModel)]="schedule"
+          name="schedule"
+          required
+        />
+
+      </div>
+
+      <div class="form-field">
+
+        <select
+          class="input"
+          [(ngModel)]="deliveryMethod"
+          name="deliveryMethod"
+        >
+
+          <option value="pickup">
+            Pickup
+          </option>
+
+          <option value="courier">
+            Courier
+          </option>
+
+        </select>
+
+      </div>
+
+      <div class="form-field">
+
+        <input
+          class="input"
+          type="number"
+          placeholder="Delivery Cost"
+          [(ngModel)]="deliveryCost"
+          name="deliveryCost"
+        />
+
+      </div>
+
+      <div class="form-field">
+
+        <input
+          class="input"
+          type="email"
+          placeholder="Email"
+          [(ngModel)]="email"
+          name="email"
+          required
+        />
+
+      </div>
+
+      <div class="form-field">
+
+        <input
+          class="input"
+          type="password"
+          placeholder="Password"
+          [(ngModel)]="password"
+          name="password"
+          required
+        />
+
+      </div>
+
+    </form>
+
+  </div>
+
+  <div class="card-actions">
+
+    <button
+      class="button primary"
+      (click)="register()"
+    >
+      Register Supermarket
+    </button>
+
+  </div>
+
+</div>

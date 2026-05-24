@@ -69,3 +69,17 @@
 .button:hover {
   opacity: 0.8;
 }
+
+.login-button {
+
+  background-color: #dc2626;
+
+  color: white;
+
+}
+
+.login-button:hover {
+
+  background-color: #b91c1c;
+
+}
