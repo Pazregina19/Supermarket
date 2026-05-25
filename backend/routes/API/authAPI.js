@@ -1,10 +1,10 @@
 const express = require('express');
 const router = express.Router();
-const ctrl = require('../../controllers/authAPIController');
-const { verifyToken } = require('../../middleWares/authJWT');
+const ctrl = require('../../controllers/API/authAPIController');
+const { verifyToken } = require('../../middleWares/authenticationMW');
 
 router.post('/register', ctrl.register);
 router.post('/login', ctrl.login);
-router.get('/me', verifyToken, ctrl.me);
+router.get('/me',ctrl.me);
 
 module.exports = router;

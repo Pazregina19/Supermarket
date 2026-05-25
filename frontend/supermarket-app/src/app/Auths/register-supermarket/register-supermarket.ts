@@ -10,7 +10,7 @@ import {
 } from '@angular/material/snack-bar';
 
 import { AuthService } from '../../services/auth';
-
+import { User } from '../../models/user';
 import { SupermarketService } from '../../services/supermarket';
 
 @Component({
@@ -50,11 +50,12 @@ export class RegisterSupermarket {
 
   register(): void {
 
-    const userData = {
+    const userData: User = {
 
       username: this.name,
       email: this.email,
-      password: this.password
+      password: this.password,
+      role: 'supermarket'
 
     };
 

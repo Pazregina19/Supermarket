@@ -4,6 +4,9 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var session = require('express-session');
+const cors = require('cors');
+
+
 
 // routes
 var indexRouter = require('./routes/index');
@@ -16,6 +19,8 @@ var dashboardRouter = require('./routes/dashboardRoutes');
 var cartRouter = require('./routes/cartRoutes');
 
 var app = express();
+
+var authRouterApi = require('./routes/API/auth');
 
 //DB connection
 const mongoose = require('mongoose');
@@ -34,6 +39,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(cors());
 
 app.use(session({
   secret: 'paw_secret_key',
@@ -57,6 +63,8 @@ app.use('/dashboard', dashboardRouter);
 app.use('/sales', saleRouter);
 app.use('/supermarkets', supermarketRouter);
 app.use('/cart', cartRouter);
+
+app.use('/api/auth', authApiRouter);
 
 // 404
 app.use(function(req, res, next) {

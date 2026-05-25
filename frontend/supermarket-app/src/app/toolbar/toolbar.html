@@ -1,1 +1,7 @@
-<p>toolbar works!</p>
+<div class="custom-toolbar">
+    <div class="toolbar-title">Supermarket App</div>
+    <div class="toolbar-buttons" *ngIf="isLoggedIn">
+        <button mat-button routerlink="/home">Home</button>
+        <button mat-button (click)="logout()">Logout</button>
+    </div>
+</div>

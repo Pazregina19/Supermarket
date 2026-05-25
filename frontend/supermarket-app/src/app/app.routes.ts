@@ -15,6 +15,7 @@ import { supermarketGuard } from './guards/supermarket-guard';
 import { courierGuard } from './guards/courier-guard';
 import { RegisterAdmin } from './Auths/register-admin/register-admin';
 import { Home } from './home/home';
+import { AccessDenied } from './Auths/access-denied/access-denied';
 
 export const routes: Routes = [
 
@@ -69,6 +70,10 @@ export const routes: Routes = [
   path: 'courier-dashboard',
   component: CourierDashboard,
   canActivate: [courierGuard]
-}
+},
+
+{path: 'access-denied', component: AccessDenied },
+{path: '', redirectTo: '/home', pathMatch: 'full' }, // redirect to home by default
+{path: '**', redirectTo: '/home' },
 
 ];

@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { User } from '../models/user';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -19,17 +20,17 @@ export class AuthService {
 
   constructor(private http: HttpClient) {}
 
-  login(email: string, password: string): Observable<any> {
+  login(email: string, password: string): Observable<User> {
 
-    return this.http.post<any>(
+    return this.http.post<User>(
       `${this.apiUrl}/login`,
       { email, password },
       httpOptions
     ).pipe(
 
-      map((response: any) => {
+      map((response: User) => {
 
-        localStorage.setItem('token', response.token);
+        localStorage.setItem('token', response.email); // Using email as token for simplicity
         localStorage.setItem('role', response.role);
         localStorage.setItem('username', response.username);
 
@@ -41,20 +42,20 @@ export class AuthService {
 
   }
 
-  register(userData: any): Observable<any> {
+  register(userData: User): Observable<User> {
 
-    return this.http.post<any>(
+    return this.http.post<User>(
       `${this.apiUrl}/register`,
       userData,
       httpOptions
     );
 
   }
-  registerCourier(userData: any): Observable<any> {
+  registerCourier(userData: User): Observable<User> {
 
   userData.role = 'courier';
 
-  return this.http.post<any>(
+  return this.http.post<User>(
     `${this.apiUrl}/register`,
     userData,
     httpOptions
@@ -62,11 +63,11 @@ export class AuthService {
 
 }
 
-registerSupermarket(userData: any): Observable<any> {
+registerSupermarket(userData: User): Observable<User> {
 
   userData.role = 'supermarket';
 
-  return this.http.post<any>(
+  return this.http.post<User>(
     `${this.apiUrl}/register`,
     userData,
     httpOptions
@@ -74,11 +75,11 @@ registerSupermarket(userData: any): Observable<any> {
 
 }
 
-registerAdmin(userData: any): Observable<any> {
+registerAdmin(userData: User): Observable<User> {
 
   userData.role = 'admin';
 
-  return this.http.post<any>(
+  return this.http.post<User>(
     `${this.apiUrl}/register`,
     userData,
     httpOptions
@@ -130,9 +131,9 @@ registerAdmin(userData: any): Observable<any> {
 
   }
 
-  getProfile(): Observable<any> {
+  getProfile(): Observable<User> {
 
-    return this.http.get<any>(
+    return this.http.get<User>(
       `${this.apiUrl}/me`
     );
 
