@@ -1,29 +1,50 @@
 import { Component } from '@angular/core';
-import { AuthService } from '../services/auth';
-import { Router } from '@angular/router';
+
 import { CommonModule } from '@angular/common';
+
+import { RouterLink, Router } from '@angular/router';
+
+import { AuthService } from '../services/auth';
 
 @Component({
   selector: 'app-toolbar',
-  imports: [CommonModule],
+
+  standalone: true,
+
+  imports: [
+    CommonModule,
+    RouterLink
+  ],
+
   templateUrl: './toolbar.html',
-  styleUrl: './toolbar.css',
+
+  styleUrls: ['./toolbar.css']
 })
 export class Toolbar {
+
   constructor(
-    private router: Router,
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router
   ) {}
 
-  logout(): void {
-    localStorage.removeItem('currentUser');
-    localStorage.removeItem('userId');
-    localStorage.removeItem('userRole');
-    this.router.navigate(['/login']);
+  get isLoggedIn(): boolean {
+
+    return this.authService.logedIn();
+
   }
 
-  isLoggedIn(): boolean {
-    return this.authService.loggedIn();
+  get role(): string | null {
+
+    return this.authService.getRole();
+
+  }
+
+  logout(): void {
+
+    this.authService.logout();
+
+    this.router.navigate(['/login']);
+
   }
 
 }

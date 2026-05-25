@@ -1,7 +1,145 @@
 <div class="custom-toolbar">
-    <div class="toolbar-title">Supermarket App</div>
-    <div class="toolbar-buttons" *ngIf="isLoggedIn">
-        <button mat-button routerlink="/home">Home</button>
-        <button mat-button (click)="logout()">Logout</button>
-    </div>
+
+  <div class="toolbar-title">
+
+    <a routerLink="/home">
+      Supermarket Marketplace
+    </a>
+
+  </div>
+
+  <div class="toolbar-links">
+
+    <!-- PUBLIC -->
+
+    <ng-container *ngIf="!isLoggedIn">
+
+      <a routerLink="/home">
+        Home
+      </a>
+
+      <a routerLink="/supermarkets">
+        Supermarkets
+      </a>
+
+      <a routerLink="/products">
+        Products
+      </a>
+
+      <a routerLink="/login">
+        Login
+      </a>
+
+      <a routerLink="/register/client">
+        Register
+      </a>
+
+    </ng-container>
+
+    <!-- CLIENT -->
+
+    <ng-container *ngIf="role === 'client'">
+
+      <a routerLink="/client-profile">
+        Profile
+      </a>
+
+      <a routerLink="/client-dashboard">
+        Dashboard
+      </a>
+
+      <a routerLink="/products">
+        Products
+      </a>
+
+      <a routerLink="/cart">
+        Cart
+      </a>
+
+      <a routerLink="/orders">
+        Orders
+      </a>
+
+      <button (click)="logout()">
+        Logout
+      </button>
+
+    </ng-container>
+
+    <!-- SUPERMARKET -->
+
+    <ng-container *ngIf="role === 'supermarket'">
+
+     <a routerLink="/supermarket-profile">
+        Profile
+     </a>
+
+      <a routerLink="/supermarket-dashboard">
+        Dashboard
+      </a>
+
+      <a routerLink="/products">
+        Products
+      </a>
+
+      <a routerLink="/add-product">
+        Add Product
+      </a>
+
+      <button (click)="logout()">
+        Logout
+      </button>
+
+    </ng-container>
+
+    <!-- COURIER -->
+
+    <ng-container *ngIf="role === 'courier'">
+
+      <a routerLink="/courier-profile">
+        Profile
+      </a>
+
+      <a routerLink="/courier-dashboard">
+        Dashboard
+      </a>
+
+      <a routerLink="/deliveries">
+        Deliveries
+      </a>
+
+      <button (click)="logout()">
+        Logout
+      </button>
+
+    </ng-container>
+
+    <!-- ADMIN -->
+
+    <ng-container *ngIf="role === 'admin'">
+
+     <a routerLink="/admin-profile">
+       Profile
+     </a>
+
+      <a routerLink="/admin-dashboard">
+        Dashboard
+      </a>
+
+      <a routerLink="/admin/users">
+        Users
+      </a>
+
+      <a routerLink="/admin/approvals">
+        Approvals
+      </a>
+
+      <button (click)="logout()">
+        Logout
+      </button>
+
+    </ng-container>
+
+  </div>
+
 </div>

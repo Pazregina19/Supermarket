@@ -1,8 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const ctrl = require('../controllers/dashboardController');
-const { isAuthenticated } = require('../middleWares/authenticationMW');
+const { verifyToken } = require('../middleWares/authenticationMW');
 
-router.get('/', isAuthenticated, ctrl.getDashboard);
+router.get('/', verifyToken, ctrl.getDashboard);
 
 module.exports = router;

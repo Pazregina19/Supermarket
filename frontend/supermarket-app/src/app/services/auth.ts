@@ -95,7 +95,7 @@ registerAdmin(userData: User): Observable<User> {
 
   }
 
-  loggedIn(): boolean {
+  logedIn(): boolean {
 
     return localStorage.getItem('token') != null;
 
@@ -131,12 +131,29 @@ registerAdmin(userData: User): Observable<User> {
 
   }
 
-  getProfile(): Observable<User> {
+  getUsername(): string | null {
 
-    return this.http.get<User>(
-      `${this.apiUrl}/me`
-    );
+  return localStorage.getItem(
+    'username'
+  );
 
-  }
+}
+
+getProfile(): Observable<any> {
+
+  const token =
+    localStorage.getItem('token');
+
+  return this.http.get<any>(
+    `${this.apiUrl}/me`,
+    {
+      headers: {
+        Authorization:
+          `Bearer ${token}`
+      }
+    }
+  );
+
+}
 
 }

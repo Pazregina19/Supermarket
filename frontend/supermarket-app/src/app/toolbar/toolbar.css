@@ -1,0 +1,74 @@
+.custom-toolbar {
+
+  width: 100%;
+
+  height: 80px;
+
+  background:
+    linear-gradient(
+      90deg,
+      #1d4ed8,
+      #2563eb
+    );
+
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  padding: 0 40px;
+
+  box-sizing: border-box;
+
+}
+
+.toolbar-title a {
+
+  color: white;
+
+  text-decoration: none;
+
+  font-size: 32px;
+
+  font-weight: bold;
+
+}
+
+.toolbar-links {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 20px;
+
+}
+
+.toolbar-links a,
+.toolbar-links button {
+
+  background: transparent;
+
+  border: none;
+
+  color: white;
+
+  font-size: 17px;
+
+  font-weight: 600;
+
+  cursor: pointer;
+
+  text-decoration: none;
+
+  transition: 0.3s;
+
+}
+
+.toolbar-links a:hover,
+.toolbar-links button:hover {
+
+  opacity: 0.8;
+
+}

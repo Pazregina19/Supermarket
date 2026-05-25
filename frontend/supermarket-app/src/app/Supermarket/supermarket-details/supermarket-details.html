@@ -1,1 +1,57 @@
-<p>supermarket-details works!</p>
+<div
+  *ngIf="loading"
+  class="loading"
+>
+  Loading supermarket...
+</div>
+
+<div
+  *ngIf="
+    !loading &&
+    supermarket
+  "
+  class="details-page"
+>
+
+  <div class="details-card">
+
+    <h1>
+      {{ supermarket.name }}
+    </h1>
+
+    <p>
+      {{ supermarket.description }}
+    </p>
+
+    <div class="details-info">
+
+      <p>
+        <strong>Street:</strong>
+        {{ supermarket.location?.street }}
+      </p>
+
+      <p>
+        <strong>City:</strong>
+        {{ supermarket.location?.city }}
+      </p>
+
+      <p>
+        <strong>Postal Code:</strong>
+        {{ supermarket.location?.postalCode }}
+      </p>
+
+      <p>
+        <strong>Schedule:</strong>
+        {{ supermarket.schedule }}
+      </p>
+
+      <p>
+        <strong>Delivery:</strong>
+        {{ supermarket.deliveryMethod?.method }}
+      </p>
+
+    </div>
+
+  </div>
+
+</div>

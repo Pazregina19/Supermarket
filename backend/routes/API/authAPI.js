@@ -5,6 +5,6 @@ const { verifyToken } = require('../../middleWares/authenticationMW');
 
 router.post('/register', ctrl.register);
 router.post('/login', ctrl.login);
-router.get('/me',ctrl.me);
+router.get('/me', verifyToken, ctrl.me);
 
 module.exports = router;

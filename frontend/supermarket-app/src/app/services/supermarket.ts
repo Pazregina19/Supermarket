@@ -9,18 +9,12 @@ import { Observable } from 'rxjs';
 })
 export class SupermarketService {
 
-  private apiUrl = 'http://localhost:3000/api/supermarkets';
+  private apiUrl =
+    'http://localhost:3000/api/supermarkets';
 
-  constructor(private http: HttpClient) {}
-
-  create(data: any): Observable<any> {
-
-    return this.http.post<any>(
-      this.apiUrl,
-      data
-    );
-
-  }
+  constructor(
+    private http: HttpClient
+  ) {}
 
   getAll(): Observable<any> {
 
@@ -30,7 +24,7 @@ export class SupermarketService {
 
   }
 
-  getOne(id: string): Observable<any> {
+  getById(id: string): Observable<any> {
 
     return this.http.get<any>(
       `${this.apiUrl}/${id}`
@@ -38,11 +32,13 @@ export class SupermarketService {
 
   }
 
-  approve(id: string): Observable<any> {
+  create(
+    supermarketData: any
+  ): Observable<any> {
 
-    return this.http.put<any>(
-      `${this.apiUrl}/${id}/approve`,
-      {}
+    return this.http.post<any>(
+      this.apiUrl,
+      supermarketData
     );
 
   }

@@ -1,5 +1,6 @@
 import { Component, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { AuthService } from './services/auth';
 
 @Component({
   selector: 'app-root',
@@ -8,5 +9,10 @@ import { RouterOutlet } from '@angular/router';
   styleUrl: './app.css'
 })
 export class App {
-  protected readonly title = signal('supermarket-app');
+  title = 'Supermarket Marketplace';
+  constructor(private auth: AuthService) {}
+
+  logedIn(): boolean {
+    return this.auth.logedIn();
+  }
 }

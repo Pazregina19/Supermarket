@@ -20,7 +20,7 @@ var cartRouter = require('./routes/cartRoutes');
 
 var app = express();
 
-var authRouterApi = require('./routes/API/auth');
+var apiAuthRoutes = require('./routes/API/authAPI');
 
 //DB connection
 const mongoose = require('mongoose');
@@ -64,7 +64,7 @@ app.use('/sales', saleRouter);
 app.use('/supermarkets', supermarketRouter);
 app.use('/cart', cartRouter);
 
-app.use('/api/auth', authApiRouter);
+app.use('/api/auth', apiAuthRoutes);
 
 // 404
 app.use(function(req, res, next) {

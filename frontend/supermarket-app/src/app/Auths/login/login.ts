@@ -26,46 +26,60 @@ export class Login {
     private snackBar: MatSnackBar
   ) {}
 
-  login(): void {
+ login(): void {
 
-    this.authService.login(
+  this.authService
+    .login(
       this.email,
       this.password
-    ).subscribe({
+    )
+    .subscribe({
 
       next: (response: any) => {
+        console.log(response);
 
-        if (response && response.token) {
+        if (
+          response &&
+          response.token
+        ) {
 
-          // redirecionamento baseado na role
+          if (
+            response.role === 'admin'
+          ) {
 
-          if (response.role === 'admin') {
-
-            this.router.navigate(['/admin-dashboard']);
-
-          } else if (response.role === 'supermarket') {
-
-            this.router.navigate(['/supermarket-dashboard']);
-
-          } else if (response.role === 'courier') {
-
-            this.router.navigate(['/courier-dashboard']);
-
-          } else {
-
-            this.router.navigate(['/']);
+            this.router.navigate([
+              '/admin-dashboard'
+            ]);
 
           }
 
-        } else {
+          else if (
+            response.role === 'supermarket'
+          ) {
 
-          this.snackBar.open(
-            'Login failed. Please try again.',
-            'Close',
-            {
-              duration: 3000
-            }
-          );
+            this.router.navigate([
+              '/supermarket-dashboard'
+            ]);
+
+          }
+
+          else if (
+            response.role === 'courier'
+          ) {
+
+            this.router.navigate([
+              '/courier-dashboard'
+            ]);
+
+          }
+
+          else {
+
+            this.router.navigate([
+              '/client-dashboard'
+            ]);
+
+          }
 
         }
 
@@ -76,7 +90,7 @@ export class Login {
         console.error(error);
 
         this.snackBar.open(
-          'Invalid credentials.',
+          'Login failed',
           'Close',
           {
             duration: 3000
@@ -88,5 +102,4 @@ export class Login {
     });
 
   }
-
 }

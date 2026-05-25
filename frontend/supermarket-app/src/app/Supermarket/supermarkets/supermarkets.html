@@ -1,0 +1,91 @@
+<div class="supermarkets-page">
+
+  <div class="page-header">
+
+    <h1>
+      Supermarkets
+    </h1>
+
+    <p>
+      Browse approved supermarkets.
+    </p>
+
+  </div>
+
+  <!-- FILTERS -->
+
+  <div class="filters-container">
+
+    <input
+      class="filter-input"
+      placeholder="Search supermarket..."
+      [(ngModel)]="searchTerm"
+      (input)="filterSupermarkets()"
+    />
+
+    <input
+      class="filter-input"
+      placeholder="Filter by city..."
+      [(ngModel)]="cityFilter"
+      (input)="filterSupermarkets()"
+    />
+
+  </div>
+
+  <!-- LOADING -->
+
+  <div
+    *ngIf="loading"
+    class="loading"
+  >
+    Loading supermarkets...
+  </div>
+
+  <!-- GRID -->
+
+  <div
+    *ngIf="!loading"
+    class="supermarkets-grid"
+  >
+
+    <div
+      class="supermarket-card"
+      *ngFor="
+        let supermarket of
+        filteredSupermarkets
+      "
+    >
+
+      <h2>
+        {{ supermarket.name }}
+      </h2>
+
+      <p>
+        {{ supermarket.description }}
+      </p>
+
+      <p>
+        <strong>City:</strong>
+        {{ supermarket.location?.city }}
+      </p>
+
+      <p>
+        <strong>Schedule:</strong>
+        {{ supermarket.schedule }}
+      </p>
+
+      <a
+        class="details-button"
+        [routerLink]="[
+          '/supermarkets',
+          supermarket._id
+        ]"
+      >
+        View Details
+      </a>
+
+    </div>
+
+  </div>
+
+</div>

@@ -1,4 +1,45 @@
-exports.isAuthenticated = (req, res, next) => {
-if (req.session.user) return next();
-res.redirect('/auth/login');
+const jwt = require('jsonwebtoken');
+
+const SECRET = 'pawAC';
+
+const verifyToken = (req, res, next) => {
+
+    const authHeader =
+    req.headers.authorization;
+
+    if (!authHeader) {
+
+        return res.status(401).json({
+            error: 'Token missing'
+        });
+
+    }
+
+    const token =
+    authHeader.split(' ')[1];
+
+    try {
+
+        const decoded =
+        jwt.verify(token, SECRET);
+
+        req.user = decoded;
+
+        next();
+
+    }
+
+    catch (err) {
+
+        return res.status(401).json({
+            error: 'Invalid token'
+        });
+
+    }
+
+};
+
+module.exports = {
+    verifyToken,
+    SECRET
 };
