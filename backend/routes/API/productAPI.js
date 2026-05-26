@@ -1,8 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const ctrl = require('../../controllers/productController');
-const apiCtrl = require('../../controllers/productAPIController');
-const { verifyToken } = require('../../middleWares/authJWT');
+const apiCtrl = require('../../routes/API/productAPIController');
+const { verifyToken } = require('../../middleWares/authenticationMW');
 
 router.get('/compare', apiCtrl.compare);
 router.get('/', ctrl.list);
