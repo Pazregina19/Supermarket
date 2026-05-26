@@ -43,4 +43,26 @@ export class SupermarketService {
 
   }
 
+  approve(id: string): Observable<any> {
+
+  const token =
+    localStorage.getItem('token');
+
+  return this.http.put<any>(
+
+    `${this.apiUrl}/${id}/approve`,
+
+    {},
+
+    {
+      headers: {
+        Authorization:
+          `Bearer ${token}`
+      }
+    }
+
+  );
+
+}
+
 }

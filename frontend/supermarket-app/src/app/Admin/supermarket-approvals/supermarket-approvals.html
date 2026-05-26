@@ -1,0 +1,64 @@
+<div class="approvals-page">
+
+  <h1>
+    Pending Supermarket Approvals
+  </h1>
+
+  <div
+    *ngIf="loading"
+    class="loading"
+  >
+    Loading...
+  </div>
+
+  <div
+    *ngIf="
+      !loading &&
+      supermarkets.length === 0
+    "
+    class="empty"
+  >
+    No pending supermarkets.
+  </div>
+
+  <div class="approvals-grid">
+
+    <div
+      class="approval-card"
+      *ngFor="
+        let supermarket of
+        supermarkets
+      "
+    >
+
+      <h2>
+        {{ supermarket.name }}
+      </h2>
+
+      <p>
+        {{ supermarket.description }}
+      </p>
+
+      <p>
+        <strong>City:</strong>
+        {{ supermarket.location?.city }}
+      </p>
+
+      <p>
+        <strong>Schedule:</strong>
+        {{ supermarket.schedule }}
+      </p>
+
+      <button
+        (click)="approve(
+          supermarket._id
+        )"
+      >
+        Approve
+      </button>
+
+    </div>
+
+  </div>
+
+</div>

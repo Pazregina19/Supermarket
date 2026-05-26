@@ -27,6 +27,7 @@ import { ClientProfile } from './Profiles/client-profile/client-profile';
 import { SupermarketProfile } from './Profiles/supermarket-profile/supermarket-profile';
 import { CourierProfile } from './Profiles/courier-profile/courier-profile';
 import { AdminProfile } from './Profiles/admin-profile/admin-profile';
+import { SupermarketApprovals } from './Admin/supermarket-approvals/supermarket-approvals';
 
 export const routes: Routes = [
 
@@ -120,6 +121,12 @@ export const routes: Routes = [
 {
   path: 'admin-profile',
   component: AdminProfile
+},
+
+{
+  path: 'admin/approvals',
+  component: SupermarketApprovals,
+  canActivate: [adminGuard]
 },
 
 {
