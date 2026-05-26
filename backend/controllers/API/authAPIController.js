@@ -1,6 +1,6 @@
-    const User = require('../models/user');
+    const User = require('../../models/user');
     const jwt = require('jsonwebtoken');
-    const { SECRET } = require('../middleWares/authJWT');
+    const { SECRET } = require('../../middleWares/authenticationMW');
 
     exports.register = async (req, res) => {
     try {
@@ -30,5 +30,5 @@
     };
 
     exports.me = (req, res) => {
-    res.json({ user: req.user });
+        res.json({ user: req.user });
     };

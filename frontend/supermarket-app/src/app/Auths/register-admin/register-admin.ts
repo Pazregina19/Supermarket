@@ -10,6 +10,7 @@ import {
 } from '@angular/material/snack-bar';
 
 import { AuthService } from '../../services/auth';
+import { User } from '../../models/user';
 
 @Component({
   selector: 'app-register-admin',
@@ -37,7 +38,7 @@ export class RegisterAdmin {
 
   register(): void {
 
-    const userData = {
+    const userData: User = {
 
       username: this.username,
 
