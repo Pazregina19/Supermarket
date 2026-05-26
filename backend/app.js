@@ -6,8 +6,6 @@ var logger = require('morgan');
 var session = require('express-session');
 const cors = require('cors');
 
-
-
 // routes
 var indexRouter = require('./routes/index');
 var authRouter = require('./routes/authenticationRoutes');
@@ -17,6 +15,10 @@ var supermarketRouter = require('./routes/supermarketRoutes');
 var deliveryRouter  = require('./routes/deliveriesRoutes');
 var dashboardRouter = require('./routes/dashboardRoutes');
 var cartRouter = require('./routes/cartRoutes');
+var apiAuthRoutes = require('./routes/API/authAPI');
+var apiDeliveriesRoutes = require('./routes/API/deliveriesAPI');
+var apiProductRoutes = require('./routes/API/productAPI');
+var apiSupermarketRoutes = require('./routes/API/supermarketAPI');
 
 var app = express();
 
@@ -40,6 +42,10 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(cors());
+app.use('/api/auth', apiAuthRoutes);
+app.use('/api/deliveries', apiDeliveriesRoutes);
+app.use('/api/products', apiProductRoutes);
+app.use('/api/supermarkets', apiSupermarketRoutes);
 
 app.use(session({
   secret: 'paw_secret_key',
