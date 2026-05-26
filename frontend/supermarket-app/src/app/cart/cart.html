@@ -1,0 +1,16 @@
+    <div class="container mt-4">
+    <h2>🛒 Carrinho</h2>
+    <a routerLink="/products" class="btn btn-secondary mb-3">← Continuar a comprar</a>
+
+    <p *ngIf="cartService.items.length === 0">O carrinho está vazio.</p>
+
+    <div *ngFor="let item of cartService.items" class="card mb-2">
+        <div class="card-body d-flex justify-content-between">
+        <span>{{ item.name }} x{{ item.quantity }}</span>
+        <span>{{ item.price * item.quantity }}€</span>
+        <button class="btn btn-danger btn-sm" (click)="remove(item._id)">Remover</button>
+        </div>
+    </div>
+
+    <h4 *ngIf="cartService.items.length > 0">Total: {{ cartService.getTotal() }}€</h4>
+    </div>

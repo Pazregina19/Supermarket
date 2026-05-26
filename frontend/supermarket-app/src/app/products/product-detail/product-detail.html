@@ -1,0 +1,24 @@
+    <div class="container mt-4" *ngIf="product">
+    <a routerLink="/products" class="btn btn-secondary mb-3">← Voltar</a>
+
+    <h2>{{ product.name }}</h2>
+    <p>{{ product.description }}</p>
+    <p><strong>Preço:</strong> {{ product.price }}€</p>
+    <p><strong>Categoria:</strong> {{ product.category }}</p>
+    <p><strong>Stock:</strong> {{ product.stock }}</p>
+    <button class="btn btn-primary" (click)="addToCart()">Adicionar ao carrinho</button>
+
+    <hr>
+    <h4>Comparação de preços</h4>
+    <table class="table" *ngIf="comparacao.length > 0">
+        <thead>
+        <tr><th>Supermercado</th><th>Preço</th></tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let p of comparacao">
+            <td>{{ p.supermarket?.name }}</td>
+            <td>{{ p.price }}€</td>
+        </tr>
+        </tbody>
+    </table>
+    </div>

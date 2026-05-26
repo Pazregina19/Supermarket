@@ -1,0 +1,21 @@
+    <div class="container mt-4">
+    <div class="d-flex justify-content-between mb-3">
+        <h2>Produtos</h2>
+        <a routerLink="/cart" class="btn btn-outline-dark">🛒 Carrinho ({{ cartService.items.length }})</a>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4 mb-3" *ngFor="let p of products">
+        <div class="card h-100">
+            <div class="card-body">
+            <h5 class="card-title">{{ p.name }}</h5>
+            <p class="card-text">{{ p.description }}</p>
+            <p><strong>{{ p.price }}€</strong></p>
+            <p class="text-muted">{{ p.category }}</p>
+            <button class="btn btn-primary me-2" (click)="addToCart(p)">Adicionar</button>
+            <a [routerLink]="['/products', p._id]" class="btn btn-outline-secondary">Ver</a>
+            </div>
+        </div>
+        </div>
+    </div>
+    </div>
