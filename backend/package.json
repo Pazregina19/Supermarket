@@ -3,13 +3,13 @@
   "version": "0.0.0",
   "private": true,
   "description": "",
-  "homepage": "https://github.com/Dxnilo223/PAW_TP.AC#readme",
+  "homepage": "https://github.com/Pazregina19/Supermarket#readme",
   "bugs": {
-    "url": "https://github.com/Dxnilo223/PAW_TP.AC/issues"
+    "url": "https://github.com/Pazregina19/Supermarket/issues"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Dxnilo223/PAW_TP.AC.git"
+    "url": "git+https://github.com/Pazregina19/Supermarket.git"
   },
   "license": "ISC",
   "author": "",
@@ -31,8 +31,7 @@
     "http-errors": "~1.6.3",
     "jade": "~1.11.0",
     "jsonwebtoken": "^9.0.3",
-    "mongoose": "^9.6.2",
-    "mongose": "^0.0.2-security",
+    "mongoose": "^8.15.1",
     "morgan": "~1.9.1",
     "multer": "^2.1.1",
     "partials": "^0.1.0",

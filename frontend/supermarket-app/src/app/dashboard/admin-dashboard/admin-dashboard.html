@@ -4,53 +4,81 @@
     Admin Dashboard
   </h1>
 
-  <div class="dashboard-grid">
+  <div class="stats-grid">
 
-    <div class="dashboard-card">
+    <div class="stat-card">
 
       <h2>
-        Users
+        {{ pendingSupermarkets.length }}
       </h2>
 
       <p>
-        Manage platform users.
+        Pending Supermarkets
       </p>
 
     </div>
 
-    <div class="dashboard-card">
+  </div>
+
+  <div class="section-title">
+
+    Pending Supermarket Approvals
+
+  </div>
+
+  <div
+    *ngIf="loading"
+    class="loading"
+  >
+    Loading...
+  </div>
+
+  <div
+    *ngIf="
+      !loading &&
+      pendingSupermarkets.length === 0
+    "
+    class="empty-message"
+  >
+    No pending supermarkets.
+  </div>
+
+  <div class="supermarkets-grid">
+
+    <div
+      class="supermarket-card"
+
+      *ngFor="
+        let supermarket of
+        pendingSupermarkets
+      "
+    >
 
       <h2>
-        Supermarkets
+        {{ supermarket.name }}
       </h2>
 
       <p>
-        Approve supermarket registrations.
+        {{ supermarket.description }}
       </p>
-
-    </div>
-
-    <div class="dashboard-card">
-
-      <h2>
-        Statistics
-      </h2>
 
       <p>
-        Monitor platform statistics.
+        <strong>City:</strong>
+        {{ supermarket.location?.city }}
       </p>
-
-    </div>
-
-    <div class="dashboard-card">
-
-      <h2>
-        Orders
-      </h2>
 
       <p>
-        View all marketplace orders.
+        <strong>Schedule:</strong>
+        {{ supermarket.schedule }}
       </p>
+
+      <button
+        (click)="approveSupermarket(
+          supermarket._id
+        )"
+      >
+        Approve
+      </button>
 
     </div>
 
