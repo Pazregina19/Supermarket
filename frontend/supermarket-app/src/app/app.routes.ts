@@ -6,6 +6,10 @@ import { RegisterClient } from './Auths/register-client/register-client';
 
 import { RegisterSupermarket } from './Auths/register-supermarket/register-supermarket';
 
+
+import { ProductList } from './products/product-list/product-list';
+import { ProductDetail } from './products/product-detail/product-detail';
+import { Cart } from './cart/cart';
 import { RegisterCourier } from './Auths/register-courrier/register-courrier';
 import { adminGuard } from './guards/admin-guard';
 import { supermarketGuard } from './guards/supermarket-guard';
@@ -25,6 +29,18 @@ import { CourierProfile } from './Profiles/courier-profile/courier-profile';
 import { AdminProfile } from './Profiles/admin-profile/admin-profile';
 
 export const routes: Routes = [
+
+  { path:'products',
+    component: ProductList
+  },
+
+  { path: 'products/:id',
+    component: ProductDetail
+  },
+
+  { path: 'cart',
+    component: Cart
+  },
 
   {
   path: 'home',
