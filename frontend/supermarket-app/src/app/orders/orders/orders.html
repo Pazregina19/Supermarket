@@ -1,0 +1,72 @@
+<div class="orders-page">
+
+  <h1>
+    My Orders
+  </h1>
+
+  <div
+    *ngIf="loading"
+    class="loading"
+  >
+
+    Loading orders...
+
+  </div>
+
+  <div
+    *ngIf="
+      !loading &&
+      orders.length === 0
+    "
+    class="empty"
+  >
+
+    No orders found.
+
+  </div>
+
+  <div class="orders-grid">
+
+    <div
+      class="order-card"
+
+      *ngFor="
+        let order of orders
+      "
+    >
+
+      <h2>
+        Order
+      </h2>
+
+      <p>
+
+        Total:
+        €{{ order.total }}
+
+      </p>
+
+      <p>
+
+        Status:
+        <span class="status">
+
+          {{ order.status }}
+
+        </span>
+
+      </p>
+
+      <p>
+
+        Created:
+        {{ order.createdAt
+        | date }}
+
+      </p>
+
+    </div>
+
+  </div>
+
+</div>

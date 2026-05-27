@@ -2,7 +2,7 @@ import { inject } from '@angular/core';
 import {CanActivateFn,Router} from '@angular/router';
 import {AuthService} from '../services/auth';
 
-export const authGuard:
+export const clientGuard:
 CanActivateFn = () => {
 
   const authService =
@@ -11,13 +11,22 @@ CanActivateFn = () => {
   const router =
     inject(Router);
 
-  if(authService.logedIn()) {
+  if(
+
+    authService.logedIn() &&
+
+    authService.getRole()
+    === 'client'
+
+  ) {
 
     return true;
 
   }
 
-  router.navigate(['/login']);
+  router.navigate([
+    '/access-denied'
+  ]);
 
   return false;
 

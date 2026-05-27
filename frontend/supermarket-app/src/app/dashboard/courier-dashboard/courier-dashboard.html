@@ -4,41 +4,73 @@
     Courier Dashboard
   </h1>
 
-  <div class="dashboard-grid">
+  <div
+    *ngIf="loading"
+    class="loading"
+  >
 
-    <div class="dashboard-card">
+    Loading deliveries...
+
+  </div>
+
+  <div
+    *ngIf="
+      !loading &&
+      deliveries.length === 0
+    "
+    class="empty"
+  >
+
+    No deliveries available.
+
+  </div>
+
+  <div class="deliveries-grid">
+
+    <div
+      class="delivery-card"
+
+      *ngFor="
+        let delivery of deliveries
+      "
+    >
 
       <h2>
-        Deliveries
+        Delivery
       </h2>
 
       <p>
-        Manage assigned deliveries.
+
+        Status:
+        <strong>
+          {{ delivery.status }}
+        </strong>
+
       </p>
-
-    </div>
-
-    <div class="dashboard-card">
-
-      <h2>
-        Completed Deliveries
-      </h2>
 
       <p>
-        Track completed orders.
+
+        Method:
+        {{ delivery.deliveryMethod }}
+
       </p>
-
-    </div>
-
-    <div class="dashboard-card">
-
-      <h2>
-        Courier Profile
-      </h2>
 
       <p>
-        Update your courier information.
+
+        Cost:
+        €{{ delivery.deliveryCost }}
+
       </p>
+
+      <button
+        (click)="acceptDelivery(
+          delivery._id
+        )"
+      >
+
+        Accept Delivery
+
+      </button>
 
     </div>
 
