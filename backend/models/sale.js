@@ -4,7 +4,8 @@ const Schema = mongoose.Schema;
 const saleSchema = new Schema({
   customerEmail: {
     type: String,
-    required: true
+    required: true,
+    match: [/^\S+@\S+\.\S+$/, "Email inválido"]
   },
 
   products: [
@@ -15,7 +16,8 @@ const saleSchema = new Schema({
       },
       quantity: {
         type: Number,
-        required: true
+        required: true,
+        min: 1
       }
     }
   ],

@@ -1,12 +1,11 @@
 const express = require('express');
 const router = express.Router();
-const ctrl = require('../../controllers/productController');
-const apiCtrl = require('../../routes/API/productAPIController');
+const ctrl = require('../../controllers/API/productAPIController');
 const { verifyToken } = require('../../middleWares/authenticationMW');
 
-router.get('/compare', apiCtrl.compare);
-router.get('/', ctrl.list);
-router.get('/:id', ctrl.view);
+router.get('/compare', ctrl.compare);
+router.get('/', ctrl.getAll);
+router.get('/:id', ctrl.view);//corrigir
 router.post('/', verifyToken, ctrl.save);
 router.put('/:id', verifyToken, ctrl.update);
 router.delete('/:id', verifyToken, ctrl.delete);
