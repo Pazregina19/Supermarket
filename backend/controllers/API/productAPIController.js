@@ -1,5 +1,5 @@
 var mongoose = require('mongoose');
-var Product = require('../../models/product');
+const Product =require('../../models/product');
 
 var productAPIController = {};
 
