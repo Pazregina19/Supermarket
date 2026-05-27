@@ -1,5 +1,5 @@
 var mongoose = require("mongoose");
-var Supermarket = require("../models/supermarket");
+const Supermarket = require('../models/supermarket');
 
 let supermarketController = {};
 
@@ -62,7 +62,7 @@ supermarketController.save = async (req, res) => {
 
       deliveryCost: Number(cost),
 
-      owner: req.session.user._id  // ← Aqui fica o owner corretamente
+      owner: (req.user || req.session.user)._id
     });
 
     await supermarket.save();

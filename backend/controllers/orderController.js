@@ -1,8 +1,20 @@
 const Order = require('../models/order');
 const Product = require('../models/product');
 
+//Update Status
+
+const validTransitions = {
+  pending: ['confirmed', 'canceled'],
+  confirmed: ['in process', 'canceled'],
+  'in process': ['in delivering'],
+  'in delivering': ['delivered'],
+  delivered: [],
+  canceled: []
+};
+
 let orderController = {};
 
+/* CREATE ORDER */
 /* CREATE ORDER */
 orderController.create = async (req, res) => {
   try {
@@ -16,6 +28,9 @@ orderController.create = async (req, res) => {
     let supermarketId = null;
     let productsArray = [];
 
+    let foundProducts = [];
+
+// Verify if the product exists and if it belong to the same SuperMarket
     for (let item of products) {
       const product = await Product.findById(item.product).populate('supermarket');
 
@@ -23,7 +38,6 @@ orderController.create = async (req, res) => {
         return res.status(404).json({ error: "Product not found" });
       }
 
-      // assures one supermarket per order
       if (!supermarketId) {
         supermarketId = product.supermarket._id;
       } else if (supermarketId.toString() !== product.supermarket._id.toString()) {
@@ -40,13 +54,12 @@ orderController.create = async (req, res) => {
 
       total += product.price * quantity;
 
-      productsArray.push({
-        product: product._id,
-        quantity
-      });
+      productsArray.push({ product: product._id, quantity });
+
+      //Save the product and tghe quantity to later lower the product's stock
+      foundProducts.push({ product, quantity });
     }
 
-    // delivery rules
     if (deliveryMethod === 'courier') {
       if (!deliveryCost || deliveryCost <= 0) {
         return res.status(400).json({
@@ -71,6 +84,12 @@ orderController.create = async (req, res) => {
     });
 
     await order.save();
+
+    //Decrement the product stock after each order
+    for (let item of foundProducts) {
+      item.product.stock -= item.quantity;
+      await item.product.save();
+    }
 
     res.status(201).json(order);
 
@@ -116,16 +135,6 @@ orderController.getOne = async (req, res) => {
   }
 };
 
-/* UPDATE STATUS */
-const validTransitions = {
-  pending: ['confirmed', 'canceled'],
-  confirmed: ['in process', 'canceled'],
-  'in process': ['in delivering'],
-  'in delivering': ['delivered'],
-  delivered: [],
-  canceled: []
-};
-
 orderController.updateStatus = async (req, res) => {
   try {
     const { status } = req.body;
@@ -142,6 +151,23 @@ orderController.updateStatus = async (req, res) => {
       return res.status(400).json({
         error: `Cannot change status from ${order.status} to ${status}`
       });
+    }
+
+    //Client has the option to cancel the order in 5 minutes after the purchase
+    if (status === 'canceled' && order.status === 'confirmed') {
+      const agora = new Date();
+      const diferencaEmMinutos = (agora - order.confirmedAt) / 1000 / 60;
+
+      if (diferencaEmMinutos > 5) {
+        return res.status(400).json({
+          error: "Não é possível cancelar. Já passaram mais de 5 minutos desde a confirmação."
+        });
+      }
+    }
+
+    // Safe the confirmation date after the order status is "confirmed"
+    if (status === 'confirmed') {
+      order.confirmedAt = new Date();
     }
 
     order.status = status;
@@ -171,8 +197,15 @@ orderController.assignCourier = async (req, res) => {
       });
     }
 
+    //
+    if (order.status !== 'confirmed') {
+      return res.status(400).json({
+        error: "Order must be confirmed before assigning a courier"
+      });
+    }
+
     order.courier = courierId;
-    order.status = 'in delivering';
+    order.status = 'in process';
 
     await order.save();
 

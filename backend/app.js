@@ -22,13 +22,11 @@ var apiSupermarketRoutes = require('./routes/API/supermarketAPI');
 
 var app = express();
 
-var apiAuthRoutes = require('./routes/API/authAPI');
-
 //DB connection
 const mongoose = require('mongoose');
 const MONGO_URI = "mongodb+srv://dannyalramos06_db_user:PAW_TP.AC@paw.trofioj.mongodb.net/?appName=PAW";
 
-mongoose.connect(MONGO_URI).then((res) => {
+mongoose.connect(MONGO_URI).then(() => {
   console.log("Connected to db!");
   console.log("http://localhost:3000");
 });
@@ -42,10 +40,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(cors());
-app.use('/api/auth', apiAuthRoutes);
-app.use('/api/deliveries', apiDeliveriesRoutes);
-app.use('/api/products', apiProductRoutes);
-app.use('/api/supermarkets', apiSupermarketRoutes);
+
 
 app.use(session({
   secret: 'paw_secret_key',
@@ -53,14 +48,18 @@ app.use(session({
   saveUninitialized: false
 }));
 
-
 app.use((req, res, next) => {
   res.locals.user = req.session.user || null;
   next();
 });
 
+// API routes
+app.use('/api/auth', apiAuthRoutes);
+app.use('/api/deliveries', apiDeliveriesRoutes);
+app.use('/api/products', apiProductRoutes);
+app.use('/api/supermarkets', apiSupermarketRoutes);
 
-//routes
+// Backoffice routes
 app.use('/', indexRouter);
 app.use('/auth', authRouter);
 app.use('/products', productRouter);
@@ -70,8 +69,6 @@ app.use('/sales', saleRouter);
 app.use('/supermarkets', supermarketRouter);
 app.use('/cart', cartRouter);
 
-app.use('/api/auth', apiAuthRoutes);
-
 // 404
 app.use(function(req, res, next) {
   next(createError(404));
@@ -79,15 +76,10 @@ app.use(function(req, res, next) {
 
 // error handler
 app.use(function (err, req, res, next) {
-
   res.locals.message = err.message;
   res.locals.error = req.app.get("env") === "development" ? err : {};
-
-  // render the error page
   res.status(err.status || 500);
   res.render("error", { title: "500" });
-
 });
-
 
 module.exports = app;

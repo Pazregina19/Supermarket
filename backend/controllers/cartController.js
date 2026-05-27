@@ -59,36 +59,26 @@ async (req, res) => {
 
 
 // ADD TO CART
-cartController.addToCart =
-(req, res) => {
+cartController.addToCart = async (req, res) => {
 
-    const productId =
-    req.params.id;
+    const productId = req.params.id;
 
-    if(!req.session.cart) {
+    const product = await Product.findById(productId);
 
+    if (!product || product.stock <= 0) {
+        return res.status(400).send('Produto sem stock disponível');
+    }
+
+    if (!req.session.cart) {
         req.session.cart = [];
     }
 
-    const existing =
-    req.session.cart.find(
+    const existing = req.session.cart.find(item => item.productId === productId);
 
-        item =>
-        item.productId === productId
-    );
-
-    if(existing) {
-
+    if (existing) {
         existing.quantity++;
-
     } else {
-
-        req.session.cart.push({
-
-            productId,
-
-            quantity: 1
-        });
+        req.session.cart.push({ productId, quantity: 1 });
     }
 
     res.redirect('/cart');
@@ -112,64 +102,51 @@ cartController.removeFromCart =
 
 
 // CHECKOUT
-cartController.checkout =
-async (req, res) => {
+cartController.checkout = async (req, res) => {
 
     try {
 
-        const cart =
-        req.session.cart || [];
+        const cart = req.session.cart || [];
 
         let products = [];
-
         let total = 0;
 
-        for(const item of cart) {
+        for (const item of cart) {
 
-            const product =
-            await Product.findById(
-                item.productId
-            );
+            const product = await Product.findById(item.productId);
 
-            if(product) {
+            if (product) {
 
-                products.push({
+                // Verificar se ainda há stock suficiente no momento do checkout
+                if (product.stock < item.quantity) {
+                    return res.status(400).send(`Stock insuficiente para o produto: ${product.name}`);
+                }
 
-                    product:
-                    product._id,
-
-                    quantity:
-                    item.quantity
-                });
-
-                total +=
-                product.price *
-                item.quantity;
+                products.push({ product: product._id, quantity: item.quantity });
+                total += product.price * item.quantity;
             }
         }
 
         const sale = new Sale({
-
-            customerEmail:
-            req.session.user.email,
-
+            customerEmail: req.session.user.email,
             products,
-
             total
         });
 
         await sale.save();
 
-        req.session.cart = [];
+        for (const item of products) {
+            await Product.findByIdAndUpdate(item.product, {
+                $inc: { stock: -item.quantity }
+            });
+        }
 
+        req.session.cart = [];
         res.redirect('/sales');
 
-    } catch(err) {
-
+    } catch (err) {
         console.log(err);
-
-        res.status(500)
-        .send('Checkout error');
+        res.status(500).send('Checkout error');
     }
 };
 
