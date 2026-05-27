@@ -1,4 +1,4 @@
-.dashboard-page {
+.orders-page {
 
   padding: 40px;
 
@@ -8,7 +8,7 @@
 
 }
 
-.dashboard-page h1 {
+.orders-page h1 {
 
   color: #1d4ed8;
 
@@ -16,7 +16,7 @@
 
 }
 
-.deliveries-grid {
+.orders-grid {
 
   display: grid;
 
@@ -30,7 +30,7 @@
 
 }
 
-.delivery-card {
+.order-card {
 
   background-color: white;
 
@@ -43,7 +43,7 @@
 
 }
 
-.delivery-card h2 {
+.order-card h2 {
 
   color: #2563eb;
 
@@ -51,7 +51,7 @@
 
 }
 
-.delivery-card p {
+.order-card p {
 
   margin-bottom: 10px;
 
@@ -59,25 +59,17 @@
 
 }
 
-.delivery-card button {
+.status {
 
-  width: 100%;
+  padding: 6px 12px;
 
-  margin-top: 20px;
+  border-radius: 8px;
 
-  padding: 14px;
+  background-color: #dbeafe;
 
-  border: none;
-
-  border-radius: 10px;
-
-  background-color: #2563eb;
-
-  color: white;
+  color: #1d4ed8;
 
   font-weight: bold;
-
-  cursor: pointer;
 
 }
 
@@ -87,7 +79,5 @@
   font-size: 18px;
 
   color: #475569;
-
-  margin-top: 30px;
 
 }

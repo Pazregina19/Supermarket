@@ -14,8 +14,7 @@ import { RegisterCourier } from './Auths/register-courrier/register-courrier';
 import { adminGuard } from './guards/admin-guard';
 import { supermarketGuard } from './guards/supermarket-guard';
 import { courierGuard } from './guards/courier-guard';
-import { RegisterAdmin } from './Auths/register-admin/register-admin';
-import { Home } from './home/home';
+import { RegisterSelect } from './Auths/register-select/register-select';
 import { AccessDenied } from './Auths/access-denied/access-denied';
 import { SupermarketDetails } from './Supermarket/supermarket-details/supermarket-details';
 import { Supermarkets } from './Supermarket/supermarkets/supermarkets';
@@ -28,6 +27,9 @@ import { SupermarketProfile } from './Profiles/supermarket-profile/supermarket-p
 import { CourierProfile } from './Profiles/courier-profile/courier-profile';
 import { AdminProfile } from './Profiles/admin-profile/admin-profile';
 import { SupermarketApprovals } from './Admin/supermarket-approvals/supermarket-approvals';
+import { Home } from './home/home';
+import { clientGuard } from './guards/client-guard';
+import { Orders } from './orders/orders/orders';
 
 export const routes: Routes = [
 
@@ -69,69 +71,107 @@ export const routes: Routes = [
   },
 
   {
-    path: 'register/admin',
-    component: RegisterAdmin
+    path: 'register/select',
+    component: RegisterSelect
   },
 
-{
-  path: 'supermarkets',
-  component: Supermarkets
-},
+  {
+    path: 'supermarkets',
+    component: Supermarkets
+  },
 
-{
-  path: 'supermarkets/:id',
-  component: SupermarketDetails
-},
+  {
+    path: 'supermarkets/:id',
+    component: SupermarketDetails
+  },
 
-{
-  path: 'client-dashboard',
-  component: ClientDashboard
-},
+  {
+    path: 'client-dashboard',
+    component: ClientDashboard,
 
-{
-  path: 'supermarket-dashboard',
-  component: SupermarketDashboard
-},
+    canActivate: [
+      clientGuard
+    ]
+  },
 
-{
-  path: 'courier-dashboard',
-  component: CourierDashboard
-},
+  {
+    path: 'supermarket-dashboard',
+    component: SupermarketDashboard,
 
-{
-  path: 'admin-dashboard',
-  component: AdminDashboard
-},
+    canActivate: [
+      supermarketGuard
+    ]
+  },
 
-{
-  path: 'client-profile',
-  component: ClientProfile
-},
+  {
+    path: 'courier-dashboard',
+    component: CourierDashboard,
 
-{
-  path: 'supermarket-profile',
-  component: SupermarketProfile
-},
+    canActivate: [
+      courierGuard
+    ]
+  },
 
-{
-  path: 'courier-profile',
-  component: CourierProfile
-},
+  {
+    path: 'admin-dashboard',
+    component: AdminDashboard,
+    canActivate: [
+      adminGuard
+    ]
+  },
 
-{
-  path: 'admin-profile',
-  component: AdminProfile
-},
+  {
+    path: 'client-profile',
+    component: ClientProfile,
 
-{
-  path: 'admin/approvals',
-  component: SupermarketApprovals,
-  canActivate: [adminGuard]
-},
+    canActivate: [
+      clientGuard
+    ]
+  },
 
-{
-    path: 'access-denied',
-    component: AccessDenied
+  {
+    path: 'supermarket-profile',
+    component: SupermarketProfile,
+    canActivate: [
+      supermarketGuard
+    ]
+  },
+
+  {
+    path: 'courier-profile',
+    component: CourierProfile,
+    canActivate: [
+      courierGuard
+    ]
+  },
+
+  {
+    path: 'admin-profile',
+    component: AdminProfile,
+    canActivate: [
+      adminGuard
+    ]
+  },
+
+  {
+    path: 'admin/approvals',
+    component: SupermarketApprovals,
+    canActivate: [adminGuard]
+  },
+
+  {
+      path: 'access-denied',
+      component: AccessDenied
+    },
+
+  {
+    path: 'orders/client',
+
+    component: Orders,
+
+    canActivate: [
+      clientGuard
+    ]
   },
 
   {

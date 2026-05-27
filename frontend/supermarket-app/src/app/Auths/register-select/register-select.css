@@ -1,0 +1,106 @@
+.register-page {
+
+  width: 100%;
+
+  min-height: 100vh;
+
+  background-color: #f4f7fb;
+
+  display: flex;
+
+  justify-content: center;
+
+  align-items: center;
+
+  padding: 40px;
+
+  box-sizing: border-box;
+
+}
+
+.register-card {
+
+  width: 100%;
+
+  max-width: 1000px;
+
+  background-color: white;
+
+  padding: 50px;
+
+  border-radius: 20px;
+
+  box-shadow:
+    0 4px 15px rgba(0,0,0,0.08);
+
+  text-align: center;
+
+}
+
+.register-card h1 {
+
+  color: #1d4ed8;
+
+  margin-bottom: 20px;
+
+}
+
+.register-card p {
+
+  color: #475569;
+
+  margin-bottom: 40px;
+
+}
+
+.register-options {
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(
+      auto-fit,
+      minmax(250px, 1fr)
+    );
+
+  gap: 25px;
+
+}
+
+.register-option {
+
+  background-color: #f8fafc;
+
+  padding: 30px;
+
+  border-radius: 18px;
+
+  text-decoration: none;
+
+  transition: 0.3s;
+
+  border: 2px solid transparent;
+
+}
+
+.register-option:hover {
+
+  transform: translateY(-5px);
+
+  border-color: #2563eb;
+
+}
+
+.register-option h2 {
+
+  color: #2563eb;
+
+  margin-bottom: 15px;
+
+}
+
+.register-option p {
+
+  color: #475569;
+
+}

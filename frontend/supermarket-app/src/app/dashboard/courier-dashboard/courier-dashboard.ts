@@ -1,9 +1,90 @@
-import { Component } from '@angular/core';
+import {Component,OnInit} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {DeliveryService} from '../../services/delivery';
 
 @Component({
   selector: 'app-courier-dashboard',
-  imports: [],
-  templateUrl: './courier-dashboard.html',
-  styleUrl: './courier-dashboard.css',
+
+  standalone: true,
+
+  imports: [
+    CommonModule
+  ],
+
+  templateUrl:
+  './courier-dashboard.html',
+
+  styleUrls: [
+    './courier-dashboard.css'
+  ]
 })
-export class CourierDashboard {}
+export class CourierDashboard
+implements OnInit {
+
+  deliveries: any[] = [];
+
+  loading: boolean = true;
+
+  constructor(
+    private deliveryService:
+    DeliveryService
+  ) {}
+
+  ngOnInit(): void {
+
+    this.loadDeliveries();
+
+  }
+
+  loadDeliveries(): void {
+
+    this.deliveryService
+      .getAvailable()
+      .subscribe({
+
+        next: (response: any) => {
+
+          this.deliveries =
+            response;
+
+          this.loading = false;
+
+        },
+
+        error: (error: any) => {
+
+          console.error(error);
+
+          this.loading = false;
+
+        }
+
+      });
+
+  }
+
+  acceptDelivery(
+    id: string
+  ): void {
+
+    this.deliveryService
+      .accept(id)
+      .subscribe({
+
+        next: () => {
+
+          this.loadDeliveries();
+
+        },
+
+        error: (error: any) => {
+
+          console.error(error);
+
+        }
+
+      });
+
+  }
+
+}
