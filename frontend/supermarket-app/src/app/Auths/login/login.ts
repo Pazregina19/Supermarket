@@ -43,6 +43,21 @@ export class Login {
           response.token
         ) {
 
+          localStorage.setItem(
+            'token',
+            response.token
+          );
+
+          localStorage.setItem(
+            'role',
+            response.role
+          );
+
+          localStorage.setItem(
+            'username',
+            response.username
+          );
+
           if (
             response.role === 'admin'
           ) {

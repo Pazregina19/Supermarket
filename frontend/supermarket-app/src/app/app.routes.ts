@@ -42,7 +42,10 @@ export const routes: Routes = [
   },
 
   { path: 'cart',
-    component: Cart
+    component: Cart,
+    canActivate: [
+      clientGuard
+    ]
   },
 
   {

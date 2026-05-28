@@ -19,6 +19,7 @@ var apiAuthRoutes = require('./routes/API/authAPI');
 var apiDeliveriesRoutes = require('./routes/API/deliveriesAPI');
 var apiProductRoutes = require('./routes/API/productAPI');
 var apiSupermarketRoutes = require('./routes/API/supermarketAPI');
+var salesAPI = require('./routes/API/sales');
 
 var app = express();
 
@@ -58,6 +59,7 @@ app.use('/api/auth', apiAuthRoutes);
 app.use('/api/deliveries', apiDeliveriesRoutes);
 app.use('/api/products', apiProductRoutes);
 app.use('/api/supermarkets', apiSupermarketRoutes);
+app.use('/api/sales', salesAPI);
 
 // Backoffice routes
 app.use('/', indexRouter);
@@ -68,6 +70,8 @@ app.use('/dashboard', dashboardRouter);
 app.use('/sales', saleRouter);
 app.use('/supermarkets', supermarketRouter);
 app.use('/cart', cartRouter);
+
+app.use('/images', express.static(path.join('public/images')));
 
 // 404
 app.use(function(req, res, next) {

@@ -1,12 +1,21 @@
-const express = require('express');
-const router = express.Router();
-const ctrl = require('../../controllers/supermarketController');
-const { verifyToken } = require('../../middleWares/authenticationMW');
-const { isAdminAPI } = require('../../middleWares/roleMW');
+const express =require('express');
+const router =express.Router();
 
-router.get('/', ctrl.list);
-router.get('/:id', ctrl.getOne);
-router.post('/', verifyToken, ctrl.save);
-router.put('/:id/approve', verifyToken, isAdminAPI, ctrl.approve);
+const ctrl =require('../../controllers/API/supermarketAPIController');
+const {verifyToken} = require('../../middleWares/authenticationMW');
+const {isAdminAPI} = require('../../middleWares/roleMW');
 
-module.exports = router;
+// Get all
+router.get('/',ctrl.getAll);
+
+// Get one
+router.get('/:id',ctrl.getOne);
+
+// Create Supermarket
+router.post('/',ctrl.save);
+
+// Approve Supermarket
+router.put('/:id/approve',verifyToken,isAdminAPI,ctrl.approve);
+
+module.exports =
+router;

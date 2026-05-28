@@ -7,82 +7,91 @@
     </h1>
 
     <p>
-      Browse approved supermarkets.
+      Explore available supermarkets
+      in the marketplace.
     </p>
 
   </div>
-
-  <!-- FILTERS -->
-
-  <div class="filters-container">
-
-    <input
-      class="filter-input"
-      placeholder="Search supermarket..."
-      [(ngModel)]="searchTerm"
-      (input)="filterSupermarkets()"
-    />
-
-    <input
-      class="filter-input"
-      placeholder="Filter by city..."
-      [(ngModel)]="cityFilter"
-      (input)="filterSupermarkets()"
-    />
-
-  </div>
-
-  <!-- LOADING -->
 
   <div
     *ngIf="loading"
     class="loading"
   >
+
     Loading supermarkets...
+
   </div>
 
-  <!-- GRID -->
-
   <div
-    *ngIf="!loading"
     class="supermarkets-grid"
+
+    *ngIf="
+      !loading &&
+      supermarkets.length > 0
+    "
   >
 
     <div
       class="supermarket-card"
+
       *ngFor="
-        let supermarket of
-        filteredSupermarkets
+        let supermarket of supermarkets
       "
     >
 
       <h2>
+
         {{ supermarket.name }}
+
       </h2>
 
-      <p>
+      <p class="description">
+
         {{ supermarket.description }}
+
       </p>
 
       <p>
-        <strong>City:</strong>
-        {{ supermarket.location?.city }}
+
+        <strong>
+          Location:
+        </strong>
+
+        {{ supermarket.location }}
       </p>
 
       <p>
-        <strong>Schedule:</strong>
-        {{ supermarket.schedule }}
+
+        <strong>
+          Delivery Cost:
+        </strong>
+
+        €{{ supermarket.deliveryCost }}
       </p>
 
-      <a
-        class="details-button"
-        [routerLink]="[
-          '/supermarkets',
-          supermarket._id
-        ]"
-      >
-        View Details
-      </a>
+      <p>
+
+        <strong>
+          Status:
+        </strong>
+
+        <span
+          [ngClass]="
+            supermarket.approved
+            ? 'approved'
+            : 'pending'
+          "
+        >
+
+          {{
+            supermarket.approved
+            ? 'Approved'
+            : 'Pending'
+          }}
+
+        </span>
+
+      </p>
 
     </div>
 

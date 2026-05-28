@@ -1,38 +1,88 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, RouterModule } from '@angular/router';
-import { CommonModule } from '@angular/common';
-import { ProductService } from '../../services/product';
-import { CartService } from '../../services/cart';
+import {
+  Component,
+  OnInit
+} from '@angular/core';
+
+import {
+  CommonModule
+} from '@angular/common';
+
+import {
+  ActivatedRoute
+} from '@angular/router';
+
+import {
+  ProductService
+} from '../../services/product';
 
 @Component({
   selector: 'app-product-detail',
-  standalone: true,
-  imports: [CommonModule, RouterModule],
-  templateUrl: './product-detail.html'
-})
-export class ProductDetail implements OnInit {
 
-  product: any = null;
-  comparacao: any[] = [];
+  standalone: true,
+
+  imports: [
+    CommonModule
+  ],
+
+  templateUrl:
+  './product-detail.html',
+
+  styleUrls: [
+    './product-detail.css'
+  ]
+})
+export class ProductDetail
+implements OnInit {
+
+  product: any;
+
+  loading: boolean = true;
 
   constructor(
-    private route: ActivatedRoute,
-    private productService: ProductService,
-    public cartService: CartService
+
+    private route:
+    ActivatedRoute,
+
+    private productService:
+    ProductService
+
   ) {}
 
-  ngOnInit() {
-    const id = this.route.snapshot.paramMap.get('id')!;
-    this.productService.getById(id).subscribe(data => {
-      this.product = data;
-      this.productService.compare(data.name).subscribe(r => {
-        this.comparacao = r;
-      });
-    });
+  ngOnInit(): void {
+
+    const id =
+    this.route.snapshot.paramMap
+      .get('id');
+
+    if(id) {
+
+      this.productService
+        .getById(id)
+        .subscribe({
+
+          next: (response: any) => {
+
+            this.product =
+              response;
+
+            this.loading =
+              false;
+
+          },
+
+          error: (error: any) => {
+
+            console.error(error);
+
+            this.loading =
+              false;
+
+          }
+
+        });
+
+    }
+
   }
 
-  addToCart() {
-    this.cartService.add(this.product);
-    alert('Adicionado ao carrinho!');
-  }
 }

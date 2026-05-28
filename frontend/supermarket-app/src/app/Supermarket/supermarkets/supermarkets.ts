@@ -1,7 +1,7 @@
 import {Component,OnInit} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {FormsModule} from '@angular/forms';
-import {RouterLink} from '@angular/router';
+
 import {SupermarketService} from '../../services/supermarket';
 
 @Component({
@@ -12,7 +12,7 @@ import {SupermarketService} from '../../services/supermarket';
   imports: [
     CommonModule,
     FormsModule,
-    RouterLink
+  
   ],
 
   templateUrl: './supermarkets.html',
@@ -49,15 +49,14 @@ implements OnInit {
       .getAll()
       .subscribe({
 
-        next: (response: any) => {
+        next: (response: any) => {~
+          console.log(response);
 
           this.supermarkets =
             response.filter(
               (s: any) => s.approved
             );
 
-          this.filteredSupermarkets =
-            this.supermarkets;
 
           this.loading = false;
 
@@ -75,40 +74,6 @@ implements OnInit {
 
   }
 
-  filterSupermarkets(): void {
-
-    this.filteredSupermarkets =
-      this.supermarkets.filter(
-        (supermarket: any) => {
-
-          const matchesSearch =
-
-            supermarket.name
-              .toLowerCase()
-              .includes(
-                this.searchTerm
-                  .toLowerCase()
-              );
-
-          const matchesCity =
-
-            this.cityFilter === '' ||
-
-            supermarket.location?.city
-              .toLowerCase()
-              .includes(
-                this.cityFilter
-                  .toLowerCase()
-              );
-
-          return (
-            matchesSearch &&
-            matchesCity
-          );
-
-        }
-      );
-
-  }
+  
 
 }

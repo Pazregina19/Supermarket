@@ -1,21 +1,142 @@
-    <div class="container mt-4">
-    <div class="d-flex justify-content-between mb-3">
-        <h2>Produtos</h2>
-        <a routerLink="/cart" class="btn btn-outline-dark">🛒 Carrinho ({{ cartService.items.length }})</a>
+<div class="products-page">
+
+  <!-- HEADER -->
+
+  <div class="page-header">
+
+    <h1>
+      Products
+    </h1>
+
+    <p>
+      Discover products from multiple supermarkets
+      and compare prices instantly.
+    </p>
+
+  </div>
+
+  <!-- LOADING -->
+
+  <div
+    *ngIf="loading"
+    class="loading"
+  >
+
+    Loading products...
+
+  </div>
+
+  <!-- EMPTY -->
+
+  <div
+    *ngIf="
+      !loading &&
+      products.length === 0
+    "
+    class="empty-state"
+  >
+
+    No products available.
+
+  </div>
+
+  <!-- PRODUCTS GRID -->
+
+  <div
+    class="products-grid"
+
+    *ngIf="
+      !loading &&
+      products.length > 0
+    "
+  >
+
+    <div
+      class="product-card"
+
+      *ngFor="
+        let product of products
+      "
+    >
+
+      <!-- IMAGE -->
+
+      <div class="image-container">
+
+        <img
+
+          [src]="
+            'http://localhost:3000/images/' +
+            product.image
+          "
+
+          alt="Product Image"
+
+          class="product-image"
+        >
+
+      </div>
+
+      <!-- INFO -->
+
+      <div class="product-info">
+
+        <div class="top-info">
+
+          <span class="category">
+
+            {{ product.category }}
+
+          </span>
+
+          <h2>
+
+            {{ product.name }}
+
+          </h2>
+
+        </div>
+
+        <p class="description">
+
+          {{ product.description }}
+
+        </p>
+
+        <!-- FOOTER -->
+
+        <div class="product-footer">
+
+          <div class="price-box">
+
+            <span class="price-label">
+              Price
+            </span>
+
+            <span class="price">
+
+              €{{ product.price }}
+
+            </span>
+
+          </div>
+
+          <button
+            class="cart-button"
+
+            (click)="addToCart(product)"
+          >
+
+            Add to Cart
+
+          </button>
+
+        </div>
+
+      </div>
+
     </div>
 
-    <div class="row">
-        <div class="col-md-4 mb-3" *ngFor="let p of products">
-        <div class="card h-100">
-            <div class="card-body">
-            <h5 class="card-title">{{ p.name }}</h5>
-            <p class="card-text">{{ p.description }}</p>
-            <p><strong>{{ p.price }}€</strong></p>
-            <p class="text-muted">{{ p.category }}</p>
-            <button class="btn btn-primary me-2" (click)="addToCart(p)">Adicionar</button>
-            <a [routerLink]="['/products', p._id]" class="btn btn-outline-secondary">Ver</a>
-            </div>
-        </div>
-        </div>
-    </div>
-    </div>
+  </div>
+
+</div>

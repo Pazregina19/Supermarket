@@ -1,18 +1,54 @@
-import { Component, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import { AuthService } from './services/auth';
+import {
+  Component
+} from '@angular/core';
+
+import {
+  RouterOutlet,
+  RouterLink,
+  Router
+} from '@angular/router';
+
+import {
+  CommonModule
+} from '@angular/common';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+
+  standalone: true,
+
+  imports: [
+    RouterOutlet,
+    RouterLink,
+    CommonModule
+  ],
+
   templateUrl: './app.html',
-  styleUrl: './app.css'
+
+  styleUrls: ['./app.css']
 })
 export class App {
-  title = 'Supermarket Marketplace';
-  constructor(private auth: AuthService) {}
 
-  logedIn(): boolean {
-    return this.auth.logedIn();
+  get isLoggedIn(): boolean {
+
+    return !!localStorage.getItem(
+      'token'
+    );
+
   }
+
+  constructor(
+    private router: Router
+  ) {}
+
+  logout(): void {
+
+    localStorage.clear();
+
+    this.router.navigate([
+      '/home'
+    ]);
+
+  }
+
 }

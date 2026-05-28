@@ -1,0 +1,110 @@
+.supermarkets-page {
+
+  padding: 40px;
+
+}
+
+.page-header {
+
+  margin-bottom: 40px;
+
+}
+
+.page-header h1 {
+
+  font-size: 42px;
+
+  color: #1e3a8a;
+
+  margin-bottom: 10px;
+
+}
+
+.page-header p {
+
+  font-size: 18px;
+
+  color: #64748b;
+
+}
+
+.loading {
+
+  font-size: 18px;
+
+  color: #475569;
+
+}
+
+.supermarkets-grid {
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(
+      auto-fit,
+      minmax(300px, 1fr)
+    );
+
+  gap: 30px;
+
+}
+
+.supermarket-card {
+
+  background: white;
+
+  padding: 25px;
+
+  border-radius: 18px;
+
+  box-shadow:
+    0 6px 18px rgba(0,0,0,0.08);
+
+  transition: 0.3s;
+
+}
+
+.supermarket-card:hover {
+
+  transform: translateY(-5px);
+
+}
+
+.supermarket-card h2 {
+
+  color: #2563eb;
+
+  margin-bottom: 15px;
+
+}
+
+.description {
+
+  color: #475569;
+
+  margin-bottom: 20px;
+
+}
+
+.supermarket-card p {
+
+  margin-bottom: 12px;
+
+}
+
+.approved {
+
+  color: #16a34a;
+
+  font-weight: bold;
+
+}
+
+.pending {
+
+  color: #d97706;
+
+  font-weight: bold;
+
+}

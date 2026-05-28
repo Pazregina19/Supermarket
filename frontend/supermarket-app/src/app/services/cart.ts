@@ -1,24 +1,92 @@
-    import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 
-    @Injectable({ providedIn: 'root' })
-    export class CartService {
+@Injectable({
+  providedIn: 'root'
+})
+export class CartService {
 
-    items: any[] = [];
+  getCart(): any[] {
 
-    add(product: any) {
-        const existing = this.items.find(i => i._id === product._id);
-        if (existing) {
-        existing.quantity++;
-        } else {
-        this.items.push({ ...product, quantity: 1 });
-        }
+    return JSON.parse(
+
+      localStorage.getItem(
+        'cart'
+      ) || '[]'
+
+    );
+
+  }
+
+  addToCart(
+    product: any
+  ): void {
+
+    const cart =
+    this.getCart();
+
+    const existing =
+    cart.find(
+
+      p => p._id === product._id
+
+    );
+
+    if(existing) {
+
+      existing.quantity++;
+
     }
 
-    remove(id: string) {
-        this.items = this.items.filter(i => i._id !== id);
+    else {
+
+      cart.push({
+
+        ...product,
+
+        quantity: 1
+
+      });
+
     }
 
-    getTotal() {
-        return this.items.reduce((sum, i) => sum + i.price * i.quantity, 0);
-    }
-    }
+    localStorage.setItem(
+
+      'cart',
+
+      JSON.stringify(cart)
+
+    );
+
+  }
+
+  removeFromCart(
+    id: string
+  ): void {
+
+    const cart =
+    this.getCart()
+    .filter(
+
+      p => p._id !== id
+
+    );
+
+    localStorage.setItem(
+
+      'cart',
+
+      JSON.stringify(cart)
+
+    );
+
+  }
+
+  clearCart(): void {
+
+    localStorage.removeItem(
+      'cart'
+    );
+
+  }
+
+}

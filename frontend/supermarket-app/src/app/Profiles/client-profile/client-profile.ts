@@ -12,7 +12,9 @@ import {
 } from '../../services/auth';
 
 @Component({
-  selector: 'app-client-profile',
+
+  selector:
+  'app-client-profile',
 
   standalone: true,
 
@@ -21,15 +23,17 @@ import {
   ],
 
   templateUrl:
-    './client-profile.html',
+  './client-profile.html',
 
-  styleUrls:
-    ['./client-profile.css']
+  styleUrls: [
+    './client-profile.css'
+  ]
+
 })
 export class ClientProfile
 implements OnInit {
 
-  user: any;
+  user: any = null;
 
   loading: boolean = true;
 
@@ -40,16 +44,24 @@ implements OnInit {
 
   ngOnInit(): void {
 
+    this.loadProfile();
+
+  }
+
+  loadProfile(): void {
+
     this.authService
       .getProfile()
       .subscribe({
 
         next: (response: any) => {
 
+          console.log(response);
           this.user =
             response.user;
 
-          this.loading = false;
+          this.loading =
+            false;
 
         },
 
@@ -57,7 +69,8 @@ implements OnInit {
 
           console.error(error);
 
-          this.loading = false;
+          this.loading =
+            false;
 
         }
 

@@ -1,86 +1,68 @@
-<div class="dashboard-page">
+<h2>
+  Pending Supermarket Approvals
+</h2>
 
-  <h1>
-    Admin Dashboard
-  </h1>
+<div *ngIf="loading">
 
-  <div class="stats-grid">
+  Loading...
 
-    <div class="stat-card">
+</div>
 
-      <h2>
-        {{ pendingSupermarkets.length }}
-      </h2>
+<div
+  *ngIf="
+    !loading &&
+    pendingSupermarkets.length === 0
+  "
+>
 
-      <p>
-        Pending Supermarkets
-      </p>
+  No pending supermarkets.
 
-    </div>
+</div>
 
-  </div>
+<div
+  class="supermarkets-grid"
 
-  <div class="section-title">
-
-    Pending Supermarket Approvals
-
-  </div>
-
-  <div
-    *ngIf="loading"
-    class="loading"
-  >
-    Loading...
-  </div>
+  *ngIf="
+    !loading &&
+    pendingSupermarkets.length > 0
+  "
+>
 
   <div
-    *ngIf="
-      !loading &&
-      pendingSupermarkets.length === 0
+    class="supermarket-card"
+
+    *ngFor="
+      let supermarket of pendingSupermarkets
     "
-    class="empty-message"
   >
-    No pending supermarkets.
-  </div>
 
-  <div class="supermarkets-grid">
+    <h3>
 
-    <div
-      class="supermarket-card"
+      {{ supermarket.name }}
 
-      *ngFor="
-        let supermarket of
-        pendingSupermarkets
-      "
+    </h3>
+
+    <p>
+
+      {{ supermarket.description }}
+
+    </p>
+
+    <p>
+
+      {{ supermarket.location }}
+
+    </p>
+
+    <button
+      (click)="approveSupermarket(
+        supermarket._id
+      )"
     >
 
-      <h2>
-        {{ supermarket.name }}
-      </h2>
+      Approve
 
-      <p>
-        {{ supermarket.description }}
-      </p>
-
-      <p>
-        <strong>City:</strong>
-        {{ supermarket.location?.city }}
-      </p>
-
-      <p>
-        <strong>Schedule:</strong>
-        {{ supermarket.schedule }}
-      </p>
-
-      <button
-        (click)="approveSupermarket(
-          supermarket._id
-        )"
-      >
-        Approve
-      </button>
-
-    </div>
+    </button>
 
   </div>
 

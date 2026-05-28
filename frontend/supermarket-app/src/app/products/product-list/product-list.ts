@@ -8,22 +8,63 @@ import { CartService } from '../../services/cart';
   selector: 'app-product-list',
   standalone: true,
   imports: [CommonModule, RouterModule],
-  templateUrl: './product-list.html'
+  templateUrl: './product-list.html',
+  styleUrls: ['./product-list.css'],
 })
 export class ProductList implements OnInit {
 
   products: any[] = [];
+  loading: boolean = true;
 
   constructor(private productService: ProductService, public cartService: CartService) {}
 
-  ngOnInit() {
-    this.productService.getAll().subscribe(data => {
-      this.products = data;
-    });
+   ngOnInit(): void {
+
+    this.loadProducts();
+
   }
 
-  addToCart(product: any) {
-    this.cartService.add(product);
-    alert('Produto adicionado ao carrinho!');
+  loadProducts(): void {
+
+    this.productService
+      .getAll()
+      .subscribe({
+
+        next: (response: any) => {
+
+          
+          this.products =
+            [...response];
+
+          this.loading =
+            false;
+
+        },
+
+        error: (error: any) => {
+
+          console.error(error);
+
+          this.loading =
+            false;
+
+        }
+
+      });
+
   }
+
+  addToCart(
+    product: any
+  ): void {
+
+    this.cartService
+      .addToCart(product);
+
+    alert(
+      'Product added to cart'
+    );
+
+  }
+
 }

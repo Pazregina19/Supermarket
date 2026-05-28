@@ -40,11 +40,12 @@ implements OnInit {
       .subscribe({
 
         next: (response: any) => {
+          console.log(response);
 
           this.pendingSupermarkets =
             response.filter(
               (supermarket: any) =>
-                supermarket.approved === false
+                !supermarket.approved
             );
 
           this.loading = false;

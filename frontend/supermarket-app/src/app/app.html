@@ -1,30 +1,49 @@
 <nav class="navbar">
 
   <div class="logo">
-    Supermarket Marketplace
+
+    <a routerLink="/home">
+
+      Supermarket Marketplace
+
+    </a>
+
   </div>
 
   <div class="nav-links">
 
     <a routerLink="/home">
+
       Home
+
     </a>
 
-    <a routerLink="/login">
-      Login
-    </a>
+    <ng-container *ngIf="!isLoggedIn">
 
-    <a routerLink="/register/client">
-      Client Register
-    </a>
+      <a routerLink="/login">
 
-    <a routerLink="/register/supermarket">
-      Supermarket Register
-    </a>
+        Login
 
-    <a routerLink="/register/courrier">
-      Courier Register
-    </a>
+      </a>
+
+      <a routerLink="/register/select">
+
+        Register
+
+      </a>
+
+    </ng-container>
+
+    <ng-container *ngIf="isLoggedIn">
+
+      <button (click)="logout()">
+
+        Logout
+
+      </button>
+
+    </ng-container>
+    
 
   </div>
 

@@ -5,7 +5,7 @@ const { verifyToken } = require('../../middleWares/authenticationMW');
 
 router.get('/compare', ctrl.compare);
 router.get('/', ctrl.getAll);
-router.get('/:id', ctrl.view);
+//router.get('/:id', ctrl.view);
 
 router.post('/', verifyToken, ctrl.save);
 router.put('/:id', verifyToken, ctrl.update);

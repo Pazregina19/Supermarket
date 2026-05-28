@@ -18,7 +18,7 @@ export class SupermarketService {
 
   getAll(): Observable<any> {
 
-    return this.http.get<any>(
+    return this.http.get(
       this.apiUrl
     );
 
@@ -26,7 +26,7 @@ export class SupermarketService {
 
   getById(id: string): Observable<any> {
 
-    return this.http.get<any>(
+    return this.http.get(
       `${this.apiUrl}/${id}`
     );
 
@@ -36,7 +36,7 @@ export class SupermarketService {
     supermarketData: any
   ): Observable<any> {
 
-    return this.http.post<any>(
+    return this.http.post(
       this.apiUrl,
       supermarketData
     );

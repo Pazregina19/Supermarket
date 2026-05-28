@@ -1,6 +1,6 @@
   const mongoose = require("mongoose");
-const Product = require("../models/product");
-const Supermarket = require("../models/supermarket");
+  const Product = require("../models/product");
+  const Supermarket = require("../models/supermarket");
 
   let productController = {};
 
