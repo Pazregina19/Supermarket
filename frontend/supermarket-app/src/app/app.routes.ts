@@ -171,8 +171,8 @@ export const routes: Routes = [
   },
 
   {
-    path: 'add-product',
-    component: CreateProduct, // Reuse CreateProduct for adding new product
+    path: 'create-product',
+    component: CreateProduct, 
     canActivate: [supermarketGuard]
   },
   

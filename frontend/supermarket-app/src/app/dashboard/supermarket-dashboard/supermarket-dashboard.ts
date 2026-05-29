@@ -31,9 +31,13 @@ export class SupermarketDashboard implements OnInit {
     private router: Router
   ) {}
 
-  addProduct(): void {this.router.navigate(['/products']);
+  createProduct(): void {
+    this.router.navigate(['/create-product']);
+  }
 
-}
+  editProfile(): void {
+    this.router.navigate(['/edit-profile']);
+  }
 
   ngOnInit(): void {
 
