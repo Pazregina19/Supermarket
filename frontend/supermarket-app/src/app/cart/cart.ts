@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CartService } from '../services/cart';
 import { SaleService} from '../services/sale';
+import { OrdersService } from '../services/orders';
 
 @Component({
   selector: 'app-cart',
@@ -24,9 +25,9 @@ implements OnInit {
   total: number = 0;
 
   constructor(
-    private cartService:
-    CartService,
-    private saleService: SaleService
+    private cartService:CartService,
+    private saleService: SaleService,
+    private ordersService: OrdersService
   ) {}
 
   ngOnInit(): void {
@@ -40,6 +41,8 @@ implements OnInit {
     this.cart =
     this.cartService
       .getCart();
+
+      console.log(this.cart);
 
     this.calculateTotal();
 
@@ -91,14 +94,70 @@ implements OnInit {
 
       next: () => {
 
-        alert(
-          'Order placed successfully!'
-        );
+       const orderData = {
 
-        this.cartService
-          .clearCart();
+          products:
+          this.cart.map(
 
-        this.loadCart();
+            product => ({
+
+              product:
+              product._id,
+
+              quantity:
+              product.quantity
+
+            })
+
+          ),
+
+          total:
+          this.total,
+
+          deliveryMethod:
+          'courier',
+
+          deliveryCost:
+          0,
+
+          supermarket:
+          this.cart[0]
+            ?.supermarket
+            ?._id
+
+        };
+
+        this.ordersService
+          .createOrder(
+            orderData
+          )
+          .subscribe({
+
+            next: () => {
+
+              alert(
+                'Order placed successfully!'
+              );
+
+              this.cartService
+                .clearCart();
+
+              this.loadCart();
+
+            },
+
+            error: (
+              error: any
+            ) => {
+
+              console.error(
+                error
+              );
+              console.group(error.error)
+
+            }
+
+          });
 
       },
 

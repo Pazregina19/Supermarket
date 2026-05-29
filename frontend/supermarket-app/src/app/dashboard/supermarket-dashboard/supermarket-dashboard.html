@@ -1,59 +1,179 @@
-<div class="dashboard-page">
+<div class="dashboard-container">
 
   <h1>
     Supermarket Dashboard
   </h1>
 
-  <div class="dashboard-grid">
+  <div class="stats-grid">
 
-    <div class="dashboard-card">
+    <div class="stat-card">
 
       <h2>
+        {{ productCount }}
+      </h2>
+
+      <p>
         Products
-      </h2>
-
-      <p>
-        Manage supermarket products.
       </p>
 
     </div>
 
-    <div class="dashboard-card">
+    <div class="stat-card">
 
       <h2>
+        {{ orderCount }}
+      </h2>
+
+      <p>
         Orders
-      </h2>
-
-      <p>
-        View customer orders.
       </p>
 
     </div>
 
-    <div class="dashboard-card">
+    <div class="stat-card">
 
       <h2>
+        €{{ salesTotal }}
+      </h2>
+
+      <p>
         Sales
-      </h2>
-
-      <p>
-        Analyze supermarket sales.
       </p>
 
     </div>
 
-    <div class="dashboard-card">
+    <div class="stat-card">
 
       <h2>
-        Supermarket Profile
+        {{ pendingOrders }}
       </h2>
 
       <p>
-        Edit supermarket details.
+        Pending
       </p>
 
     </div>
 
   </div>
+
+  <section class="products-section">
+
+    <div class="section-header">
+
+      <h2>
+        Products
+      </h2>
+
+      <button
+        (click) = "addProduct()"
+      >
+        Add Product
+      </button>
+
+    </div>
+
+    <table>
+
+      <thead>
+
+        <tr>
+
+          <th>Name</th>
+
+          <th>Price</th>
+
+          <th>Stock</th>
+
+          <th>Actions</th>
+
+        </tr>
+
+      </thead>
+
+      <tbody>
+
+        <tr
+          *ngFor="
+            let product of products
+          "
+        >
+
+          <td>
+            {{ product.name }}
+          </td>
+
+          <td>
+            €{{ product.price }}
+          </td>
+
+          <td>
+            {{ product.stock }}
+          </td>
+
+          <td>
+
+            <button class="edit-btn">
+              Edit
+            </button>
+
+            <button class="delete-btn">
+              Delete
+            </button>
+
+          </td>
+
+        </tr>
+
+      </tbody>
+
+    </table>
+
+  </section>
+
+  <section class="orders-section">
+
+    <h2>
+      Orders
+    </h2>
+
+    <div class="empty-box">
+
+      Orders will appear here.
+
+    </div>
+
+  </section>
+
+  <section class="profile-section">
+
+    <h2>
+      Supermarket Profile
+    </h2>
+    
+
+    <div class="profile-card">
+
+      <p>
+        Name:
+        HortiFruit
+      </p>
+
+      <p>
+        City:
+        Felgueiras
+      </p>
+
+      <p>
+        Schedule:
+        9h - 21h
+      </p>
+
+      <button>
+        Edit Profile
+      </button>
+
+    </div>
+
+  </section>
 
 </div>

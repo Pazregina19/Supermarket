@@ -1,31 +1,25 @@
-const Sale =require('../../models/sale');
+const Sale = require('../../models/sale');
 
 let controller = {};
 
-//Get all sales
-controller.getAll =
-async (req, res) => {
+// Get all sales
+controller.getAll = async (req, res) => {
 
     try {
 
-        const sales =
-        await Sale.find();
+        const sales = await Sale.find();
 
-        res.json(
-            sales
-        );
+        res.json(sales);
 
     }
 
-    catch(err) {
+    catch (err) {
 
         console.log(err);
 
-        res.status(500)
-        .json({
+        res.status(500).json({
 
-            error:
-            'Server error'
+            error: 'Server error'
 
         });
 
@@ -33,38 +27,33 @@ async (req, res) => {
 
 };
 
-//Create sale
-controller.create =
-async (req, res) => {
+// Create sale
+controller.create = async (req, res) => {
 
     try {
 
-        const sale =
-        new Sale({
+        const sale = new Sale({
 
             ...req.body,
 
             customer:
-            req.user.id
+                req.user._id || req.user.id
 
         });
 
         await sale.save();
 
-        res.status(201)
-        .json(sale);
+        res.status(201).json(sale);
 
     }
 
-    catch(err) {
+    catch (err) {
 
         console.log(err);
 
-        res.status(500)
-        .json({
+        res.status(500).json({
 
-            error:
-            'Server error'
+            error: err.message
 
         });
 
@@ -72,5 +61,4 @@ async (req, res) => {
 
 };
 
-module.exports =
-controller;
+module.exports = controller;

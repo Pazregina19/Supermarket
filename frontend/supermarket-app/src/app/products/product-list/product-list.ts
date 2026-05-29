@@ -55,16 +55,32 @@ export class ProductList implements OnInit {
   }
 
   addToCart(
-    product: any
-  ): void {
+  product: any
+): void {
+
+  const success =
 
     this.cartService
       .addToCart(product);
+
+  if (success) {
 
     alert(
       'Product added to cart'
     );
 
   }
+
+  else {
+
+    alert(
+
+      'You can only purchase products from one supermarket at a time.'
+
+    );
+
+  }
+
+}
 
 }

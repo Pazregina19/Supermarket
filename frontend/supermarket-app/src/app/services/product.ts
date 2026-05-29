@@ -17,6 +17,10 @@ export class ProductService {
     return this.http.get(`${this.url}/${id}`);
   }
 
+  addProduct(productData: any): Observable<any> {
+    return this.http.post(this.url, productData);
+  }
+
   compare(name: string): Observable<any> {
     return this.http.get(`${this.url}/compare?name=${name}`);
   }

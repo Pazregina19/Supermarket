@@ -1,10 +1,11 @@
 const express = require('express');
 const router = express.Router();
-const ctrl = require('../../controllers/deliveryController'); // já existe
-const { verifyToken } = require('../../middleWares/authenticationMW'); // já existe
+const ctrl = require('../../controllers/API/deliveryAPIController');
+const { verifyToken } = require('../../middleWares/authenticationMW'); 
 
-router.get('/', verifyToken, ctrl.list);
+router.get('/', verifyToken, ctrl.getPending);
 router.put('/:id/accept', verifyToken, ctrl.accept);
-router.put('/:id/status', verifyToken, ctrl.updateStatus);
+router.get('/my', verifyToken, ctrl.getMyDeliveries);
+router.put('/:id/deliver', verifyToken, ctrl.markDelivered);
 
 module.exports = router;

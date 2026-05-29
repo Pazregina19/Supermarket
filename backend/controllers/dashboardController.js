@@ -29,6 +29,6 @@
         data.totalOrders = await Sale.countDocuments({ customerEmail: email });
     }
 
-    res.render('dashboards/index', { role, data });
+    res.render('dashboards/index', { title: 'Dashboard', role, data });
 
     };

@@ -9,7 +9,7 @@ import {Observable} from 'rxjs';
 export class OrdersService {
 
   apiUrl =
-  'http://localhost:3000/api/sales';
+  'http://localhost:3000/api/orders';
 
   constructor(
     private http: HttpClient
@@ -45,5 +45,35 @@ export class OrdersService {
     };
 
   }
+
+  createOrder(
+  orderData:any
+){
+
+  const token =
+  localStorage.getItem(
+    'token'
+  );
+
+  return this.http.post(
+
+    this.apiUrl,
+
+    orderData,
+
+    {
+
+      headers: {
+
+        Authorization:
+        `Bearer ${token}`
+
+      }
+
+    }
+
+  );
+
+}
 
 }

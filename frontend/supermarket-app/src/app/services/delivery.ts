@@ -1,5 +1,5 @@
-import { Injectable }from '@angular/core';
-import {HttpClient,HttpHeaders} from '@angular/common/http';
+import {Injectable} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 
 @Injectable({
@@ -7,19 +7,34 @@ import {Observable} from 'rxjs';
 })
 export class DeliveryService {
 
-  apiUrl =
+  private apiUrl =
   'http://localhost:3000/api/deliveries';
 
   constructor(
     private http: HttpClient
   ) {}
 
-  getAvailable():
+  getPending():
   Observable<any> {
 
-    return this.http.get<any>(
+    const token =
+    localStorage.getItem(
+      'token'
+    );
+
+    return this.http.get(
+
       this.apiUrl,
-      this.getHeaders()
+
+      {
+        headers: {
+
+          Authorization:
+          `Bearer ${token}`
+
+        }
+      }
+
     );
 
   }
@@ -28,65 +43,84 @@ export class DeliveryService {
     id: string
   ): Observable<any> {
 
+    const token =
+    localStorage.getItem(
+      'token'
+    );
+
     return this.http.put(
 
-      `${this.apiUrl}/accept/${id}`,
+      `${this.apiUrl}/${id}/accept`,
 
       {},
 
-      this.getHeaders()
+      {
+        headers: {
+
+          Authorization:
+          `Bearer ${token}`
+
+        }
+      }
 
     );
 
   }
 
-  updateStatus(
-    id: string,
-    status: string
-  ): Observable<any> {
+  getMyDeliveries() {
 
-    return this.http.put(
+  const token =
+  localStorage.getItem(
+    'token'
+  );
 
-      `${this.apiUrl}/status/${id}`,
+  return this.http.get(
 
-      { status },
+    `${this.apiUrl}/my`,
 
-      this.getHeaders()
+    {
 
-    );
-
-  }
-
-  myDeliveries():
-  Observable<any> {
-
-    return this.http.get<any>(
-
-      `${this.apiUrl}/my-deliveries`,
-
-      this.getHeaders()
-
-    );
-
-  }
-
-  getHeaders() {
-
-    const token =
-    localStorage.getItem('token');
-
-    return {
-
-      headers:
-      new HttpHeaders({
+      headers: {
 
         Authorization:
         `Bearer ${token}`
 
-      })
+      }
 
-    };
+    }
 
-  }
+  );
+
+}
+
+markDelivered(
+  id: string
+) {
+
+  const token =
+  localStorage.getItem(
+    'token'
+  );
+
+  return this.http.put(
+
+    `${this.apiUrl}/${id}/deliver`,
+
+    {},
+
+    {
+
+      headers: {
+
+        Authorization:
+        `Bearer ${token}`
+
+      }
+
+    }
+
+  );
+
+}
 
 }

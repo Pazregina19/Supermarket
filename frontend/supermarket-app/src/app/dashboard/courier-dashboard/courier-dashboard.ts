@@ -39,7 +39,7 @@ implements OnInit {
   loadDeliveries(): void {
 
     this.deliveryService
-      .getAvailable()
+      .getPending()
       .subscribe({
 
         next: (response: any) => {
@@ -86,5 +86,28 @@ implements OnInit {
       });
 
   }
+
+  markDelivered(
+    id: string
+  ): void {
+
+    this.deliveryService
+      .markDelivered(id)
+      .subscribe({
+
+        next: () => {
+
+          this.loadDeliveries();
+
+        },
+
+        error: (error) => {
+
+          console.error(error);
+
+        }
+
+      });
+}
 
 }

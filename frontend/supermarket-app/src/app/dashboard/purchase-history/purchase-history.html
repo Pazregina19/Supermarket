@@ -1,0 +1,33 @@
+<h1>
+  Purchase History
+</h1>
+
+<div
+  *ngFor="
+    let sale of sales
+  "
+>
+
+  <h3>
+
+    Order
+
+    {{ sale._id }}
+
+  </h3>
+
+  <p>
+
+    Total:
+    €{{ sale.total }}
+
+  </p>
+
+  <p>
+
+    Status:
+    {{ sale.status }}
+
+  </p>
+
+</div>

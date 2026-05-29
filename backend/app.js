@@ -20,6 +20,8 @@ var apiDeliveriesRoutes = require('./routes/API/deliveriesAPI');
 var apiProductRoutes = require('./routes/API/productAPI');
 var apiSupermarketRoutes = require('./routes/API/supermarketAPI');
 var salesAPI = require('./routes/API/sales');
+var deliveriesAPI = require('./routes/API/deliveriesAPI');
+var orderAPI = require('./routes/API/orderAPI');
 
 var app = express();
 
@@ -60,6 +62,8 @@ app.use('/api/deliveries', apiDeliveriesRoutes);
 app.use('/api/products', apiProductRoutes);
 app.use('/api/supermarkets', apiSupermarketRoutes);
 app.use('/api/sales', salesAPI);
+app.use('/api/deliveries', deliveriesAPI);
+app.use('/api/orders', orderAPI);
 
 // Backoffice routes
 app.use('/', indexRouter);

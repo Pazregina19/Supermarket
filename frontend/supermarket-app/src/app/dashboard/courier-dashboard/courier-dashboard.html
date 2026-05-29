@@ -72,6 +72,21 @@
 
       </button>
 
+      <button
+        *ngIf="
+          delivery.status ===
+          'accepted'
+        "
+
+        (click)="markDelivered(
+          delivery._id
+        )"
+      >
+
+        Mark Delivered
+
+      </button>
+
     </div>
 
   </div>

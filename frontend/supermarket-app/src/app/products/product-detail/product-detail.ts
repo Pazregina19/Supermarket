@@ -1,19 +1,7 @@
-import {
-  Component,
-  OnInit
-} from '@angular/core';
-
-import {
-  CommonModule
-} from '@angular/common';
-
-import {
-  ActivatedRoute
-} from '@angular/router';
-
-import {
-  ProductService
-} from '../../services/product';
+import {Component,OnInit} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {ActivatedRoute} from '@angular/router';
+import {ProductService} from '../../services/product';
 
 @Component({
   selector: 'app-product-detail',

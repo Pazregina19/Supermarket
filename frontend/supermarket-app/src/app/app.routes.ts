@@ -6,7 +6,7 @@ import { RegisterClient } from './Auths/register-client/register-client';
 
 import { RegisterSupermarket } from './Auths/register-supermarket/register-supermarket';
 
-
+import { ProductService } from './services/product';
 import { ProductList } from './products/product-list/product-list';
 import { ProductDetail } from './products/product-detail/product-detail';
 import { Cart } from './cart/cart';
@@ -30,6 +30,7 @@ import { SupermarketApprovals } from './Admin/supermarket-approvals/supermarket-
 import { Home } from './home/home';
 import { clientGuard } from './guards/client-guard';
 import { Orders } from './orders/orders/orders';
+import { CreateProduct } from './products/product-create/product-create';
 
 export const routes: Routes = [
 
@@ -162,20 +163,23 @@ export const routes: Routes = [
     canActivate: [adminGuard]
   },
 
-  {
-      path: 'access-denied',
-      component: AccessDenied
-    },
-
-  {
+    {
     path: 'orders/client',
 
-    component: Orders,
-
-    canActivate: [
-      clientGuard
-    ]
+    component: Orders, // Reuse Orders component for client orders
+    canActivate: [clientGuard]
   },
+
+  {
+    path: 'add-product',
+    component: CreateProduct, // Reuse CreateProduct for adding new product
+    canActivate: [supermarketGuard]
+  },
+  
+  {
+      path: 'access-denied', // Route for access denied page
+      component: AccessDenied
+    },
 
   {
     path: '',
