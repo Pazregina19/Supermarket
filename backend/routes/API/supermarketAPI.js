@@ -15,7 +15,7 @@ router.get('/mine', verifyToken, ctrl.getMine);
 router.get('/:id', ctrl.getOne);
 
 // Create Supermarket
-router.post('/', ctrl.save);
+router.post('/', verifyToken, ctrl.save);
 
 // Approve Supermarket
 router.put('/:id/approve', verifyToken, isAdminAPI, ctrl.approve);

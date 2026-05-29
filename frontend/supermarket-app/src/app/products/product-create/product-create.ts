@@ -22,25 +22,32 @@ export class CreateProduct implements OnInit {
   price = 0;
   stock = 0;
   image = '';
-  supermarketId = '';  // ← novo campo
+  supermarketId = '';
 
   constructor(
     private productService: ProductService,
-    private supermarketService: SupermarketService,  // ← novo serviço
+    private supermarketService: SupermarketService,
     private router: Router
   ) {}
 
-  ngOnInit(): void {
-    // Vai buscar o supermarket do utilizador autenticado
-    this.supermarketService.getMine().subscribe({
-      next: (supermarket) => {
-        this.supermarketId = supermarket._id;
-      },
-      error: () => {
-        alert('Erro ao carregar o supermarket. Certifica-te que estás autenticado.');
+ngOnInit(): void {
+  this.supermarketService.getMine().subscribe({
+    next: (supermarket) => {
+      this.supermarketId = supermarket._id;
+    },
+    error: (err) => {
+      if (err.status === 401) {
+        alert('Sessão expirada. Faz login novamente.');
+        this.router.navigate(['/login']);
+      } else if (err.status === 404) {
+        alert('Nenhum supermarket encontrado para esta conta.');
+        this.router.navigate(['/supermarket-dashboard']);
+      } else {
+        alert(`Erro ${err.status}: ${err.error?.error || 'Erro desconhecido'}`);
       }
-    });
-  }
+    }
+  });
+}
 
   save(): void {
     const productData = {
@@ -50,7 +57,7 @@ export class CreateProduct implements OnInit {
       price: this.price,
       stock: this.stock,
       image: this.image,
-      supermarket: this.supermarketId 
+      supermarket: this.supermarketId
     };
 
     this.productService.addProduct(productData).subscribe({

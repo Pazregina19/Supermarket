@@ -21,9 +21,11 @@ export class SupermarketService {
     return this.http.get(`${this.apiUrl}/${id}`);
   }
 
-  create(supermarketData: any): Observable<any> {
-    return this.http.post(this.apiUrl, supermarketData);
-  }
+create(supermarketData: any): Observable<any> {
+  const token = localStorage.getItem('token');
+  const headers = new HttpHeaders({ Authorization: `Bearer ${token}` });
+  return this.http.post(this.apiUrl, supermarketData, { headers });
+}
 
   approve(id: string): Observable<any> {
     const token = localStorage.getItem('token');
