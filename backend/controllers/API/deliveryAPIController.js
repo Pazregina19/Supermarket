@@ -13,7 +13,7 @@ async (req, res) => {
         const deliveries =
         await Delivery.find({
 
-            status: 'pending'
+            status: 'available'
 
         })
         .populate('sale');

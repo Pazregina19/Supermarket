@@ -116,4 +116,14 @@ supermarketController.getOne = async (req, res) => {
   }
 };
 
+supermarketController.getMine = async (req, res) => {
+  try {
+    const supermarket = await Supermarket.findOne({ owner: req.user._id });
+    if (!supermarket) return res.status(404).json({ error: 'Supermarket not found' });
+    res.json(supermarket);
+  } catch (err) {
+    res.status(500).json({ error: 'Server error' });
+  }
+};
+
 module.exports = supermarketController;
