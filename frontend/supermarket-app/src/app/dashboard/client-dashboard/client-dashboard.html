@@ -4,97 +4,53 @@
     Client Dashboard
   </h1>
 
-  <div class="stats-grid">
+  <div *ngIf="loading" class="loading">
+    Loading stats...
+  </div>
+
+  <div *ngIf="!loading" class="stats-grid">
 
     <div class="stat-card">
-
-      <h2>
-        5
-      </h2>
-
-      <p>
-        Orders
-      </p>
-
+      <h2>{{ totalOrders }}</h2>
+      <p>Orders</p>
     </div>
 
     <div class="stat-card">
-
-      <h2>
-        2
-      </h2>
-
-      <p>
-        Pending Deliveries
-      </p>
-
+      <h2>{{ pendingDeliveries }}</h2>
+      <p>Pending Deliveries</p>
     </div>
 
     <div class="stat-card">
-
-      <h2>
-        €340
-      </h2>
-
-      <p>
-        Total Purchases
-      </p>
-
+      <h2>€{{ totalPurchases | number:'1.2-2' }}</h2>
+      <p>Total Purchases</p>
     </div>
 
   </div>
 
   <div class="section-title">
-
     Quick Actions
-
   </div>
 
   <div class="actions-grid">
 
-    <a
-      routerLink="/products"
-      class="action-card"
-    >
-
-      <h2>
-        Browse Products
-      </h2>
-
-      <p>
-        Explore marketplace products.
-      </p>
-
+    <a routerLink="/products" class="action-card">
+      <h2>Browse Products</h2>
+      <p>Explore marketplace products.</p>
     </a>
 
-    <a
-      routerLink="/cart"
-      class="action-card"
-    >
-
-      <h2>
-        View Cart
-      </h2>
-
-      <p>
-        Manage your shopping cart.
-      </p>
-
+    <a routerLink="/cart" class="action-card">
+      <h2>View Cart</h2>
+      <p>Manage your shopping cart.</p>
     </a>
 
-    <a
-      routerLink="/client-profile"
-      class="action-card"
-    >
+    <a routerLink="/orders/client" class="action-card">
+      <h2>My Orders</h2>
+      <p>View your order history.</p>
+    </a>
 
-      <h2>
-        Profile
-      </h2>
-
-      <p>
-        Update account information.
-      </p>
-
+    <a routerLink="/client-profile" class="action-card">
+      <h2>Profile</h2>
+      <p>Update account information.</p>
     </a>
 
   </div>

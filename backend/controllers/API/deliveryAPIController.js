@@ -3,8 +3,12 @@ const Sale =require('../../models/sale');
 
 let controller = {};
 
-// Get pending deliveries
-
+/**
+ * Retrieves pending deliveries
+ * @param {*} req 
+ * @param {*} res 
+ * @returns list of pending deliveries or error message
+ */
 controller.getPending =
 async (req, res) => {
 
@@ -40,8 +44,12 @@ async (req, res) => {
 
 };
 
-// Accept delivery
 
+/**
+ * Accepts a delivery  by the authenticated courier
+ * @param {*} req 
+ * @param {*} res 
+ */
 controller.accept =
 async (req, res) => {
 
@@ -90,8 +98,12 @@ async (req, res) => {
 
 };
 
-// Get my deliveries
-
+/**
+ * Retrieves the authenticated courier's deliveries
+ * @param {*} req 
+ * @param {*} res 
+ * @return list of deliveries or error message
+ */
 controller.getMyDeliveries =
 async (req, res) => {
 
@@ -126,8 +138,12 @@ async (req, res) => {
 
 };
 
-// MARK AS DELIVERED
-
+/**
+ * Marks a delivery as delivered
+ * @param {*} req 
+ * @param {*} res 
+ * @returns updated delivery or error message
+ */
 controller.markDelivered =
 async (req, res) => {
 
@@ -173,6 +189,7 @@ async (req, res) => {
     }
 
 };
+
 
 module.exports =
 controller;

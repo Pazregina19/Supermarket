@@ -1,4 +1,4 @@
-import {Component,OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component,OnInit} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {FormsModule} from '@angular/forms';
 
@@ -33,8 +33,8 @@ implements OnInit {
   loading: boolean = true;
 
   constructor(
-    private supermarketService:
-    SupermarketService
+    private supermarketService:SupermarketService,
+    private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
@@ -49,8 +49,7 @@ implements OnInit {
       .getAll()
       .subscribe({
 
-        next: (response: any) => {~
-          console.log(response);
+        next: (response: any) => {
 
           this.supermarkets =
             response.filter(
@@ -59,6 +58,8 @@ implements OnInit {
 
 
           this.loading = false;
+          this.cdr.markForCheck();
+
 
         },
 
@@ -67,6 +68,7 @@ implements OnInit {
           console.error(error);
 
           this.loading = false;
+          this.cdr.markForCheck();  
 
         }
 

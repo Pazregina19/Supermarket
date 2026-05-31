@@ -1,4 +1,4 @@
-import {Component,OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component,OnInit} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {ActivatedRoute} from '@angular/router';
 import {ProductService} from '../../services/product';
@@ -32,7 +32,9 @@ implements OnInit {
     ActivatedRoute,
 
     private productService:
-    ProductService
+    ProductService,
+
+    private cdr: ChangeDetectorRef
 
   ) {}
 
@@ -56,6 +58,8 @@ implements OnInit {
             this.loading =
               false;
 
+              this.cdr.markForCheck();
+
           },
 
           error: (error: any) => {
@@ -64,6 +68,8 @@ implements OnInit {
 
             this.loading =
               false;
+
+              this.cdr.markForCheck();
 
           }
 

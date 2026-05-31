@@ -1,15 +1,6 @@
-import {
-  Component,
-  OnInit
-} from '@angular/core';
-
-import {
-  CommonModule
-} from '@angular/common';
-
-import {
-  AuthService
-} from '../../services/auth';
+import {ChangeDetectorRef, Component,OnInit} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {AuthService} from '../../services/auth';
 
 @Component({
 
@@ -38,8 +29,8 @@ implements OnInit {
   loading: boolean = true;
 
   constructor(
-    private authService:
-    AuthService
+    private authService:AuthService,
+    private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
@@ -63,6 +54,8 @@ implements OnInit {
           this.loading =
             false;
 
+          this.cdr.markForCheck();
+
         },
 
         error: (error: any) => {
@@ -71,6 +64,8 @@ implements OnInit {
 
           this.loading =
             false;
+
+          this.cdr.markForCheck();
 
         }
 

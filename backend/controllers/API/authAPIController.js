@@ -2,6 +2,12 @@
     const jwt = require('jsonwebtoken');
     const { SECRET } = require('../../middleWares/authenticationMW');
 
+    /**
+     * Registers a new user
+     * @param {*} req 
+     * @param {*} res 
+     * @returns user created message or error message
+     */
     exports.register = async (req, res) => {
     try {
         const { username, email, password, phone, address, role } = req.body;
@@ -14,6 +20,12 @@
     }
     };
 
+    /**
+     * Logs in a user
+     * @param {*} req 
+     * @param {*} res 
+     * @returns token and user info or error message
+     */
     exports.login = async (req, res) => {
     try {
         const { email, password } = req.body;
@@ -29,6 +41,12 @@
     }
     };
 
+    /**
+     * Retrieves the authenticated user's information
+     * @param {*} req 
+     * @param {*} res 
+     * @returns user information or error message
+     */
     exports.me = (req, res) => {
         res.json({ user: req.user });
     };

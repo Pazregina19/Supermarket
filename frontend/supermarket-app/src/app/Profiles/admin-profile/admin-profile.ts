@@ -1,4 +1,5 @@
 import {
+  ChangeDetectorRef,
   Component,
   OnInit
 } from '@angular/core';
@@ -34,8 +35,8 @@ implements OnInit {
   loading: boolean = true;
 
   constructor(
-    private authService:
-    AuthService
+    private authService:AuthService,
+    private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
@@ -50,6 +51,7 @@ implements OnInit {
             response.user;
 
           this.loading = false;
+          this.cdr.markForCheck();
 
         },
 
@@ -58,7 +60,7 @@ implements OnInit {
           console.error(error);
 
           this.loading = false;
-
+          this.cdr.markForCheck();
         }
 
       });

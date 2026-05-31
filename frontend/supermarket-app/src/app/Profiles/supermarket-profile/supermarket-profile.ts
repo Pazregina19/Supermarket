@@ -1,15 +1,6 @@
-import {
-  Component,
-  OnInit
-} from '@angular/core';
-
-import {
-  CommonModule
-} from '@angular/common';
-
-import {
-  AuthService
-} from '../../services/auth';
+import {ChangeDetectorRef, Component,OnInit} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {AuthService} from '../../services/auth';
 
 @Component({
   selector: 'app-supermarket-profile',
@@ -34,8 +25,8 @@ implements OnInit {
   loading: boolean = true;
 
   constructor(
-    private authService:
-    AuthService
+    private authService:AuthService,
+    private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {

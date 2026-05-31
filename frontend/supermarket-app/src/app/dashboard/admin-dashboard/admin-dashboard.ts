@@ -1,4 +1,4 @@
-import {Component,OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component,OnInit} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {SupermarketService} from '../../services/supermarket';
 
@@ -24,7 +24,9 @@ implements OnInit {
 
   constructor(
     private supermarketService:
-    SupermarketService
+    SupermarketService,
+
+    private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
@@ -49,6 +51,7 @@ implements OnInit {
             );
 
           this.loading = false;
+          this.cdr.markForCheck();
 
         },
 
@@ -57,6 +60,7 @@ implements OnInit {
           console.error(error);
 
           this.loading = false;
+          this.cdr.markForCheck();
 
         }
 

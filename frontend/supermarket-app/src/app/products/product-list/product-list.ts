@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { ProductService } from '../../services/product';
@@ -16,7 +16,12 @@ export class ProductList implements OnInit {
   products: any[] = [];
   loading: boolean = true;
 
-  constructor(private productService: ProductService, public cartService: CartService) {}
+  constructor(
+    private productService: ProductService, 
+    public cartService: CartService,
+    public cdr: ChangeDetectorRef
+  
+  ) {}
 
    ngOnInit(): void {
 
@@ -39,6 +44,8 @@ export class ProductList implements OnInit {
           this.loading =
             false;
 
+          this.cdr.markForCheck();
+
         },
 
         error: (error: any) => {
@@ -47,6 +54,8 @@ export class ProductList implements OnInit {
 
           this.loading =
             false;
+
+            this.cdr.markForCheck();
 
         }
 

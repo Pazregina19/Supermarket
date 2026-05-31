@@ -1,4 +1,4 @@
-import {Component,OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component,OnInit} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {OrdersService} from '../../services/orders';
 
@@ -23,8 +23,8 @@ implements OnInit {
   loading: boolean = true;
 
   constructor(
-    private ordersService:
-    OrdersService
+    private ordersService:OrdersService,
+    private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
@@ -44,6 +44,7 @@ implements OnInit {
           this.orders = response;
 
           this.loading = false;
+          this.cdr.markForCheck();
 
         },
 
@@ -52,7 +53,7 @@ implements OnInit {
           console.error(error);
 
           this.loading = false;
-
+          this.cdr.markForCheck();
         }
 
       });

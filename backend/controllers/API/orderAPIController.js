@@ -1,8 +1,12 @@
 const Order = require('../../models/order');
 
 let controller = {};
-
-// Create order
+/**
+ * Creates a new order
+ * @param {*} req 
+ * @param {*} res 
+ * @returns created order or error message
+ */
 controller.create = async (req,res) => {
 
   try {
@@ -50,7 +54,12 @@ controller.create = async (req,res) => {
 
 };
 
-// Update order status
+/**
+ * Updates an order's status
+ * @param {*} req 
+ * @param {*} res 
+ * @returns updated order or error message
+ */
 controller.updateStatus = async (req, res) => {
 
   try {
@@ -123,7 +132,12 @@ controller.updateStatus = async (req, res) => {
 
 };
 
-// Get all orders
+/**
+ * Retrieves all orders
+ * @param {*} req 
+ * @param {*} res 
+ * @returns list of orders or error message
+ */
 controller.getAll = async (req,res) => {
 
   try {

@@ -2,7 +2,12 @@ const Supermarket = require('../../models/supermarket');
 
 let controller = {};
 
-// Create
+/**
+ * Creates a new supermarket
+ * @param {*} req 
+ * @param {*} res 
+ * @returns created supermarket or error message
+ */
 controller.save = async (req, res) => {
     try {
 
@@ -26,7 +31,12 @@ controller.save = async (req, res) => {
     }
 };
 
-// Get all
+/**
+ * Retrieves all supermarkets
+ * @param {*} req 
+ * @param {*} res 
+ * @returns list of supermarkets or error message
+ */
 controller.getAll = async (req, res) => {
     try {
 
@@ -45,7 +55,12 @@ controller.getAll = async (req, res) => {
     }
 };
 
-// Get one
+/**
+ * Retrieves a single supermarket
+ * @param {*} req 
+ * @param {*} res 
+ * @returns supermarket or error message
+ */
 controller.getOne = async (req, res) => {
     try {
 
@@ -64,7 +79,12 @@ controller.getOne = async (req, res) => {
     }
 };
 
-// Approve
+/**
+ * Approves a supermarket
+ * @param {*} req 
+ * @param {*} res 
+ * @returns approved supermarket or error message
+ */
 controller.approve = async (req, res) => {
     try {
 
@@ -87,7 +107,12 @@ controller.approve = async (req, res) => {
     }
 };
 
-// Get supermarket owned by logged-in user
+/**
+ * Retrieves the logged-in user's supermarket
+ * @param {*} req 
+ * @param {*} res 
+ * @returns supermarket or error message
+ */
 controller.getMine = async (req, res) => {
     try {
 

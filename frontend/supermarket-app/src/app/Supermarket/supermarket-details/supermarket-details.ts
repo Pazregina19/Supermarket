@@ -1,4 +1,4 @@
-import {Component,OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component,OnInit} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {ActivatedRoute} from '@angular/router';
 import {SupermarketService} from '../../services/supermarket';
@@ -27,8 +27,8 @@ implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private supermarketService:
-    SupermarketService
+    private supermarketService:SupermarketService,
+    private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
@@ -49,6 +49,7 @@ implements OnInit {
               response;
 
             this.loading = false;
+            this.cdr.markForCheck();
 
           },
 
@@ -57,7 +58,7 @@ implements OnInit {
             console.error(error);
 
             this.loading = false;
-
+            this.cdr.markForCheck();
           }
 
         });

@@ -2,7 +2,12 @@ const Sale = require('../../models/sale');
 
 let controller = {};
 
-// Get all sales
+/**
+ * Retrieves all sales
+ * @param {*} req 
+ * @param {*} res 
+ * @returns list of sales or error message
+ */
 controller.getAll = async (req, res) => {
 
     try {
@@ -27,7 +32,12 @@ controller.getAll = async (req, res) => {
 
 };
 
-// Create sale
+/**
+ * Creates a new sale
+ * @param {*} req 
+ * @param {*} res 
+ * @returns created sale or error message
+ */
 controller.create = async (req, res) => {
 
     try {
